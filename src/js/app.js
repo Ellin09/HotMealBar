@@ -180,6 +180,12 @@ class App {
         case 'admin-orders':
           adminViews.renderOrders(this.viewContainer);
           break;
+        case 'apply':
+          customerViews.renderApplyJob(this.viewContainer);
+          break;
+        case 'track-order':
+          customerViews.renderTrackOrder(this.viewContainer);
+          break;
         case 'admin-customers':
           adminViews.renderCustomers(this.viewContainer);
           break;

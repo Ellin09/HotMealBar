@@ -3,7 +3,7 @@
 class AppStore {
   constructor() {
     this.state = {
-      activeView: 'home', // 'home' | 'catalog' | 'checkout' | 'tracking' | 'admin-dash' | 'admin-orders' | 'admin-customers'
+      activeView: 'home', // 'home' | 'catalog' | 'checkout' | 'tracking' | 'apply' | 'track-order' | 'admin-dash' | 'admin-orders' | 'admin-customers'
       meals: [],
       customers: [],
       orders: [],

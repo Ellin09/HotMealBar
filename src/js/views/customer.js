@@ -15,6 +15,8 @@ let catalogFilters = {
   limit: 12
 };
 
+let trackOrderResult = null;
+
 export const customerViews = {
   // Render Customer Home View
   renderHome(container) {
@@ -679,6 +681,260 @@ export const customerViews = {
         </aside>
       </div>
     `;
+  },
+
+  renderApplyJob(container) {
+    container.innerHTML = `
+      <section class="relative bg-primary rounded-[2rem] overflow-hidden mb-12 p-8 md:p-16 shadow-premium text-white">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary-dark/80 to-transparent z-0"></div>
+        <div class="max-w-2xl relative z-10 space-y-5">
+          <span class="text-accent bg-accent/15 border border-accent/20 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Opportunity</span>
+          <h1 class="font-display text-3xl md:text-4xl lg:text-5xl text-white font-extrabold leading-tight">
+            Earn Extra Pocket Money as a <span class="text-accent">Dumpling Reseller</span>
+          </h1>
+          <p class="text-secondary-light text-sm md:text-base leading-relaxed">
+            University students can join our reseller programme — sell premium frozen dumplings to your campus community and earn commission on every order.
+          </p>
+        </div>
+      </section>
+
+      <div class="flex flex-col lg:flex-row gap-8">
+        <aside class="w-full lg:w-80 flex-shrink-0">
+          <div class="glass-card rounded-[2rem] p-6 border border-secondary/5 space-y-5">
+            <h3 class="font-display font-bold text-lg text-primary">Why Join Us?</h3>
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 bg-accent/10 rounded-xl flex items-center justify-center text-accent flex-shrink-0 mt-0.5">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                  <h4 class="font-display font-semibold text-sm text-primary">Flexible Income</h4>
+                  <p class="text-xs text-secondary-light leading-relaxed">Earn commission on every sale — work around your class schedule.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 bg-success/10 rounded-xl flex items-center justify-center text-success flex-shrink-0 mt-0.5">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+                </div>
+                <div>
+                  <h4 class="font-display font-semibold text-sm text-primary">Campus-Friendly</h4>
+                  <p class="text-xs text-secondary-light leading-relaxed">No upfront cost, no inventory — designed for students.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0 mt-0.5">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0H6.375c-.621 0-1.125-.504-1.125-1.125V14.25m17.25 0V6.375c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v7.875m17.25 0h-1.5"/></svg>
+                </div>
+                <div>
+                  <h4 class="font-display font-semibold text-sm text-primary">We Handle Delivery</h4>
+                  <p class="text-xs text-secondary-light leading-relaxed">Collect orders and addresses — we ship directly to your customers.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 bg-yellow-100 rounded-xl flex items-center justify-center text-yellow-600 flex-shrink-0 mt-0.5">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
+                </div>
+                <div>
+                  <h4 class="font-display font-semibold text-sm text-primary">Community Network</h4>
+                  <p class="text-xs text-secondary-light leading-relaxed">Join a growing network of student entrepreneurs across campuses.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <main class="flex-grow">
+          <div class="glass-card rounded-[2rem] p-6 md:p-8 border border-secondary/5 space-y-6">
+            <h2 class="font-display text-2xl font-bold text-primary border-b border-secondary/5 pb-4">Student Reseller Application</h2>
+            <form id="applyJobForm" onsubmit="event.preventDefault(); window.app.submitApplication(new FormData(this))" class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                  <label class="text-xs font-semibold text-secondary-light block">Full Name</label>
+                  <input type="text" name="fullName" required placeholder="e.g. Ahmad bin Abdullah" class="form-input-premium text-sm py-2.5" />
+                </div>
+                <div class="space-y-1">
+                  <label class="text-xs font-semibold text-secondary-light block">Student ID</label>
+                  <input type="text" name="studentId" required placeholder="e.g. A21CS1234" class="form-input-premium text-sm py-2.5" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                  <label class="text-xs font-semibold text-secondary-light block">University / Institution</label>
+                  <input type="text" name="university" required placeholder="e.g. Universiti Teknologi Malaysia" class="form-input-premium text-sm py-2.5" />
+                </div>
+                <div class="space-y-1">
+                  <label class="text-xs font-semibold text-secondary-light block">Faculty / Department</label>
+                  <input type="text" name="faculty" required placeholder="e.g. Faculty of Computing" class="form-input-premium text-sm py-2.5" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                  <label class="text-xs font-semibold text-secondary-light block">Email Address</label>
+                  <input type="email" name="email" required placeholder="e.g. ahmad@graduate.utm.my" class="form-input-premium text-sm py-2.5" />
+                </div>
+                <div class="space-y-1">
+                  <label class="text-xs font-semibold text-secondary-light block">Phone Number</label>
+                  <input type="tel" name="phone" required placeholder="e.g. +60 12-345 6789" class="form-input-premium text-sm py-2.5" />
+                </div>
+              </div>
+              <div class="space-y-1">
+                <label class="text-xs font-semibold text-secondary-light block">Why do you want to become a reseller?</label>
+                <textarea name="motivation" rows="4" required placeholder="Tell us about your motivation and how you plan to sell frozen dumplings on your campus..." class="form-input-premium text-sm py-2.5"></textarea>
+              </div>
+              <div class="pt-2">
+                <label class="flex items-start gap-3 cursor-pointer">
+                  <input type="checkbox" name="agree" required class="accent-accent mt-0.5" />
+                  <span class="text-xs text-secondary-light leading-relaxed">I confirm that I am a registered university student and agree to the reseller programme terms and conditions.</span>
+                </label>
+              </div>
+              <div class="pt-6 border-t border-secondary/5 flex justify-end gap-3">
+                <button type="button" onclick="window.app.switchView('home')" class="px-6 py-3 border border-secondary/15 rounded-2xl text-secondary hover:bg-background-dark font-medium text-sm transition-all cursor-pointer">Cancel</button>
+                <button type="submit" class="px-8 py-3 bg-accent hover:bg-accent-dark text-white font-semibold rounded-2xl shadow-accent-glow hover:shadow-none transition-all cursor-pointer text-sm">Submit Application</button>
+              </div>
+            </form>
+          </div>
+        </main>
+      </div>
+    `;
+  },
+
+  submitApplication(formData) {
+    const application = {
+      fullName: formData.get('fullName'),
+      studentId: formData.get('studentId'),
+      university: formData.get('university'),
+      faculty: formData.get('faculty'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      motivation: formData.get('motivation'),
+      submittedAt: new Date().toISOString()
+    };
+    const apps = JSON.parse(localStorage.getItem('gk_applications') || '[]');
+    apps.push(application);
+    localStorage.setItem('gk_applications', JSON.stringify(apps));
+    window.app.showFloatingAlert('Application submitted successfully! We will contact you soon.', 'success');
+    window.app.switchView('home');
+  },
+
+  renderTrackOrder(container) {
+    const statusLabels = {
+      'received': 'Order Received', 'preparing': 'Preparing', 'cooking': 'Cooking',
+      'out_for_delivery': 'Out for Delivery', 'delivered': 'Delivered'
+    };
+    const statusColors = {
+      'received': 'bg-blue-100 text-blue-700', 'preparing': 'bg-yellow-100 text-yellow-700',
+      'cooking': 'bg-orange-100 text-orange-700', 'out_for_delivery': 'bg-purple-100 text-purple-700',
+      'delivered': 'bg-green-100 text-green-700'
+    };
+
+    const recentOrders = store.state.orders.slice(0, 8).map(o => {
+      const meal = store.state.meals.find(m => m.mealId === o.mealId);
+      return { ...o, meal };
+    });
+
+    let resultHtml = '';
+    if (trackOrderResult) {
+      if (trackOrderResult.order) {
+        const { order, tracking, meal, customer } = trackOrderResult;
+        resultHtml = `
+          <div class="glass-card rounded-[2rem] p-6 md:p-8 border border-secondary/5 space-y-6 animate-slide-up">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-secondary/5 pb-5 gap-3">
+              <div>
+                <span class="text-[10px] text-accent font-semibold uppercase tracking-wider">Order Found</span>
+                <h2 class="font-display text-2xl font-bold text-primary mt-0.5">Order #${order.orderId}</h2>
+              </div>
+              <span class="px-4 py-1.5 rounded-full text-xs font-bold ${statusColors[order.status] || 'bg-gray-100 text-gray-700'}">
+                ${statusLabels[order.status] || order.status}
+              </span>
+            </div>
+            ${renderTrackingStepper(order.status)}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-secondary/5">
+              <div class="space-y-3">
+                <h4 class="font-display font-semibold text-xs uppercase tracking-wider text-secondary-light">Order Details</h4>
+                <div class="text-xs text-charcoal space-y-2 leading-relaxed">
+                  <p><strong class="text-primary">Meal:</strong> ${meal ? meal.mealName : 'N/A'}</p>
+                  <p><strong class="text-primary">Quantity:</strong> ${order.quantity}</p>
+                  <p><strong class="text-primary">Amount:</strong> $${order.amount.toFixed(2)}</p>
+                  <p><strong class="text-primary">Date:</strong> ${new Date(order.orderDate).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <h4 class="font-display font-semibold text-xs uppercase tracking-wider text-secondary-light">Delivery Info</h4>
+                <div class="text-xs text-charcoal space-y-2 leading-relaxed">
+                  <p><strong class="text-primary">Customer:</strong> ${customer ? customer.name : 'Guest'}</p>
+                  <p><strong class="text-primary">Est. Arrival:</strong> ${tracking ? tracking.estimatedTime : 'N/A'}</p>
+                  <p><strong class="text-primary">Driver:</strong> ${tracking ? tracking.driverName : 'N/A'}</p>
+                  <p><strong class="text-primary">Contact:</strong> ${tracking ? tracking.driverPhone : 'N/A'}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        resultHtml = `
+          <div class="glass-card rounded-[2rem] p-12 text-center border border-secondary/5">
+            <svg class="w-12 h-12 mx-auto mb-4 text-secondary/35" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            <p class="font-display font-bold text-lg text-primary mb-2">Order Not Found</p>
+            <p class="text-xs text-secondary-light">No order matches "${trackOrderResult.query}". Please check the order ID and try again.</p>
+          </div>
+        `;
+      }
+    } else {
+      resultHtml = `
+        <div class="glass-card rounded-[2rem] p-6 md:p-8 border border-secondary/5">
+          <h3 class="font-display font-bold text-lg text-primary mb-4">Recent Orders</h3>
+          ${recentOrders.length === 0 ? '<p class="text-xs text-secondary-light text-center py-8">No orders found.</p>' : `
+            <div class="space-y-3">
+              ${recentOrders.map(o => `
+                <button onclick="window.app.trackOrderLookup('${o.orderId}')" class="w-full flex items-center justify-between p-4 bg-background rounded-2xl border border-secondary/5 hover:border-accent/30 hover:bg-white transition-all cursor-pointer text-left">
+                  <div class="flex items-center gap-3">
+                    ${o.meal ? `<img src="${o.meal.image}" alt="${o.meal.mealName}" class="w-10 h-10 rounded-xl object-cover border border-secondary/10" />` : ''}
+                    <div>
+                      <span class="font-display font-semibold text-sm text-primary block">${o.orderId}</span>
+                      <span class="text-xs text-secondary-light">${o.meal ? o.meal.mealName : 'Unknown'} · $${o.amount.toFixed(2)}</span>
+                    </div>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-[10px] font-bold ${statusColors[o.status] || 'bg-gray-100 text-gray-700'}">${statusLabels[o.status] || o.status}</span>
+                </button>
+              `).join('')}
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    container.innerHTML = `
+      <section class="max-w-3xl mx-auto space-y-8">
+        <div class="text-center space-y-3">
+          <h1 class="font-display text-3xl md:text-4xl font-extrabold text-primary">Track Your Order</h1>
+          <p class="text-sm text-secondary-light">Enter your order ID to check the real-time status of your delivery.</p>
+        </div>
+        <div class="glass-card rounded-[2rem] p-6 md:p-8 border border-secondary/5">
+          <form onsubmit="event.preventDefault(); window.app.trackOrderLookup(this.orderId.value)" class="flex flex-col sm:flex-row gap-3">
+            <div class="relative flex-grow">
+              <input type="text" name="orderId" id="trackOrderInput" placeholder="Enter Order ID (e.g. ord_1234)" class="form-input-premium text-sm py-3 pl-11" value="${trackOrderResult ? trackOrderResult.query : ''}" />
+              <svg class="w-5 h-5 text-secondary/40 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+            <button type="submit" class="bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-3 rounded-xl shadow-accent-glow hover:shadow-none transition-all cursor-pointer text-sm whitespace-nowrap">Track Order</button>
+          </form>
+        </div>
+        ${resultHtml}
+      </section>
+    `;
+  },
+
+  trackOrderLookup(query) {
+    const q = query.trim();
+    if (!q) return;
+    const order = store.state.orders.find(o => o.orderId.toLowerCase() === q.toLowerCase());
+    const tracking = order ? store.state.delivery.find(d => d.orderId === order.orderId) : null;
+    const meal = order ? store.state.meals.find(m => m.mealId === order.mealId) : null;
+    const customer = order ? store.state.customers.find(c => c.customerId === order.customerId) : null;
+    trackOrderResult = { query: q, order, tracking, meal, customer };
+    const container = document.getElementById('view-container');
+    if (store.state.activeView === 'track-order' && container) {
+      this.renderTrackOrder(container);
+    }
   }
 };
 
@@ -689,3 +945,5 @@ window.app.catalogSort = customerViews.catalogSort.bind(customerViews);
 window.app.catalogSearch = customerViews.catalogSearch.bind(customerViews);
 window.app.catalogPage = customerViews.catalogPage.bind(customerViews);
 window.app.submitCheckout = customerViews.submitCheckout.bind(customerViews);
+window.app.submitApplication = customerViews.submitApplication.bind(customerViews);
+window.app.trackOrderLookup = customerViews.trackOrderLookup.bind(customerViews);
