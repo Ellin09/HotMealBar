@@ -16,6 +16,12 @@ A high-performance, responsive, and frontend-only **Hot Meal Food Ordering Syste
 - **Slide-out Cart Panel**: Allows real-time quantity adjustments, cart totals, and item removals.
 - **Checkout & Active Tracking Simulation**: Includes address inputs, mock payment configuration, and a live en-route delivery tracking page that updates step-by-step progress and map coordinates using a background state loop.
 
+### 📦 Order Tracking
+- **Track Order Page**: Allows users to track the real-time status and progress of their orders from placement through to delivery.
+
+### 💼 Student Reseller Portal
+- **Job Application Page**: Students can apply to become resellers and earn extra pocket money by selling products through the platform.
+
 ### 📊 Admin Panel
 - **Real-Time KPI Dashboard**: Displays total orders, revenue, active deliveries, and client ratings with a custom Canvas-based sales trend line chart.
 - **Interactive Orders Ledger**: Search, filter, and modify order stages (Pending, Prep, Out for Delivery, Delivered, Cancelled) dynamically.
