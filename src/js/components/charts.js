@@ -31,10 +31,10 @@ export function renderRevenueChart(canvasId, timelineData) {
 
   // Draw Grid Lines and Labels
   const gridCount = 4;
-  ctx.strokeStyle = 'rgba(65, 90, 119, 0.08)'; // Secondary outline color
+  ctx.strokeStyle = 'rgba(244, 234, 210, 0.10)'; // faint cream grid on dark
   ctx.lineWidth = 1;
-  ctx.fillStyle = '#5E7A9C'; // Secondary-light text color
-  ctx.font = '10px Inter, sans-serif';
+  ctx.fillStyle = 'rgba(244, 234, 210, 0.55)'; // cream label text
+  ctx.font = '600 10px Oswald, sans-serif';
   ctx.textAlign = 'right';
   ctx.textBaseline = 'middle';
 
@@ -66,8 +66,8 @@ export function renderRevenueChart(canvasId, timelineData) {
 
   // Draw Gradient area under line
   const grad = ctx.createLinearGradient(0, padding.top, 0, padding.top + graphHeight);
-  grad.addColorStop(0, 'rgba(226, 118, 27, 0.25)'); // Accent transparent
-  grad.addColorStop(1, 'rgba(226, 118, 27, 0.00)');
+  grad.addColorStop(0, 'rgba(197, 54, 43, 0.35)'); // chili red transparent
+  grad.addColorStop(1, 'rgba(197, 54, 43, 0.00)');
 
   ctx.beginPath();
   timelineData.forEach((d, i) => {
@@ -113,7 +113,7 @@ export function renderRevenueChart(canvasId, timelineData) {
     }
   });
 
-  ctx.strokeStyle = '#E2761B'; // Accent (wok orange)
+  ctx.strokeStyle = '#DC5A4D'; // chili red (light) line
   ctx.lineWidth = 3.5;
   ctx.lineCap = 'round';
   ctx.stroke();
@@ -126,15 +126,15 @@ export function renderRevenueChart(canvasId, timelineData) {
     // Outer circle
     ctx.beginPath();
     ctx.arc(x, y, 6, 0, Math.PI * 2);
-    ctx.fillStyle = '#FFFFFF';
+    ctx.fillStyle = '#F4EAD2';
     ctx.fill();
-    ctx.strokeStyle = '#E2761B';
+    ctx.strokeStyle = '#C5362B';
     ctx.lineWidth = 2.5;
     ctx.stroke();
 
     // Value text above active point
-    ctx.fillStyle = '#16284D'; // Primary
-    ctx.font = 'bold 9px Inter, sans-serif';
+    ctx.fillStyle = '#DFB752'; // brass
+    ctx.font = 'bold 9px Oswald, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText(`RM${Math.round(d.amount)}`, x, y - 12);
   });

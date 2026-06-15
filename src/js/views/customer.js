@@ -41,70 +41,49 @@ export const customerViews = {
     });
 
     const marqueeTags = ['Hand-folded Dumplings', '好米巴', 'Mee Tarik 拉面', 'Charcoal Skewers', 'Beijing Zhajiang Noodles', '100% Halal', 'Beef DingDing 丁丁', 'Since 1989', 'Hot in 35 min'];
-    const marquee = marqueeTags.concat(marqueeTags).map(t => `<span class="px-6 text-lg font-display italic text-white/80">${t}</span><span class="text-accent">&#10022;</span>`).join('');
+    const marquee = marqueeTags.concat(marqueeTags).map(t => `<span class="px-6 text-sm font-display uppercase tracking-[0.2em] text-cream-light/85">${t}</span><span class="text-accent text-lg">&#10022;</span>`).join('');
 
     container.innerHTML = `
-      <!-- ===================== HERO ===================== -->
-      <section class="relative grid lg:grid-cols-2 gap-10 lg:gap-6 items-center mb-6 pt-2">
-        <!-- decorative blobs -->
-        <div class="pointer-events-none absolute -top-10 -left-16 w-72 h-72 bg-teal/10 rounded-full blur-3xl"></div>
-        <div class="pointer-events-none absolute top-20 right-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl"></div>
-
-        <div class="relative z-10 space-y-6">
-          <span class="inline-flex items-center gap-2 bg-white border border-accent/20 text-accent px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-[0.15em] shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-spice animate-pulse"></span> Halal Chinese Kitchen · Since 1989
-          </span>
-          <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-primary font-black leading-[0.95] text-balance">
-            Hand-folded,<br/>fire-grilled,<br/><span class="text-accent">served piping hot.</span>
+      <!-- ===================== HERO (menu cover) ===================== -->
+      <section class="relative grid lg:grid-cols-12 gap-8 lg:gap-10 items-center mb-4 pt-2">
+        <div class="lg:col-span-7 relative z-10 space-y-5">
+          <span class="rule-tag text-accent"><span class="eyebrow">好米巴 · Halal Chinese · Est. 1989</span></span>
+          <h1 class="font-display font-bold uppercase text-ink leading-[0.84] tracking-tight text-6xl md:text-7xl xl:text-[5.5rem] text-balance">
+            Hand-folded.<br/>Fire-grilled.<br/><span class="text-accent neon">Piping hot.</span>
           </h1>
-          <p class="font-hand text-2xl text-teal -mt-1">好米巴 — your neighbourhood hot meal bar</p>
-          <p class="text-secondary text-base leading-relaxed max-w-md">
-            Dumplings folded by hand each morning, noodles pulled to order, skewers kissed by charcoal. Real Halal Chinese comfort food, delivered to your door in under 35 minutes.
+          <p class="font-brush text-teal text-3xl leading-none">热腾腾 · your neighbourhood hot meal bar</p>
+          <p class="text-secondary text-base leading-relaxed max-w-md border-l-4 border-accent pl-4">
+            Dumplings folded by hand each morning, noodles pulled to order, skewers kissed by charcoal — Halal Chinese comfort food delivered hot in under 35 minutes.
           </p>
-          <div class="flex flex-wrap gap-3 pt-1">
-            <button onclick="window.app.switchView('catalog')" class="btn-shine bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-2xl shadow-accent-glow hover:shadow-none transition-all cursor-pointer active:scale-95">
-              Order Now
-            </button>
-            <button onclick="document.getElementById('home-bestsellers').scrollIntoView({behavior:'smooth'})" class="bg-white hover:bg-background-dark text-primary border border-secondary/15 font-semibold px-8 py-4 rounded-2xl transition-all cursor-pointer active:scale-95">
-              See Bestsellers
-            </button>
+          <div class="flex flex-wrap gap-4 pt-1">
+            <button onclick="window.app.switchView('catalog')" class="btn-stamp btn-shine px-7 py-3.5 text-base">Order Now</button>
+            <button onclick="document.getElementById('home-bestsellers').scrollIntoView({behavior:'smooth'})" class="btn-ghost px-7 py-3.5 text-base">See Bestsellers</button>
           </div>
-          <!-- trust row -->
-          <div class="flex flex-wrap items-center gap-x-7 gap-y-3 pt-4">
-            <div class="flex items-center gap-2">
-              <div class="w-9 h-9 rounded-xl bg-success/10 text-success flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-              <div><p class="text-sm font-bold text-primary leading-none">100% Halal</p><p class="text-[11px] text-secondary-light">Certified kitchen</p></div>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-9 h-9 rounded-xl bg-gold/15 text-gold-dark flex items-center justify-center"><svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
-              <div><p class="text-sm font-bold text-primary leading-none"><span data-count="4.9">0</span> / 5.0</p><p class="text-[11px] text-secondary-light"><span data-count="12000" data-suffix="+">0</span> orders</p></div>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-              <div><p class="text-sm font-bold text-primary leading-none"><span data-count="35">0</span> minutes</p><p class="text-[11px] text-secondary-light">Hot delivery</p></div>
-            </div>
+          <!-- trust strip -->
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 pt-4">
+            <div><p class="font-display text-2xl font-bold text-ink leading-none"><span data-count="4.9">0</span><span class="text-accent">/5</span></p><p class="text-[10px] uppercase tracking-[0.18em] text-secondary mt-0.5"><span data-count="12000" data-suffix="+">0</span> orders</p></div>
+            <div class="w-0.5 h-9 bg-ink/25"></div>
+            <div><p class="font-display text-2xl font-bold text-ink leading-none"><span data-count="35">0</span> min</p><p class="text-[10px] uppercase tracking-[0.18em] text-secondary mt-0.5">Hot delivery</p></div>
+            <div class="w-0.5 h-9 bg-ink/25"></div>
+            <div><p class="font-display text-2xl font-bold text-ink leading-none">100%</p><p class="text-[10px] uppercase tracking-[0.18em] text-secondary mt-0.5">Halal certified</p></div>
           </div>
         </div>
 
-        <!-- Hero photo collage -->
-        <div class="relative z-10 h-[420px] md:h-[520px]">
-          <div class="absolute top-0 right-2 w-[68%] h-[64%] rounded-[2rem] overflow-hidden shadow-premium-hover rotate-2 animate-floaty border-4 border-white">
-            <img src="./assets/dumplings-bowl.jpeg" alt="Hot Meal Bar dumplings" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='./assets/dumplings-plate.jpeg'"/>
-          </div>
-          <div class="absolute bottom-2 left-0 w-[54%] h-[50%] rounded-[2rem] overflow-hidden shadow-premium-hover -rotate-3 border-4 border-white" style="animation: floaty 7s ease-in-out infinite;">
-            <img src="./assets/chicken-skewers.jpeg" alt="Grilled skewers" class="w-full h-full object-cover"/>
-          </div>
-          <div class="absolute bottom-16 right-4 w-[40%] h-[40%] rounded-[2rem] overflow-hidden shadow-premium-hover rotate-3 border-4 border-white" style="animation: floaty 8s ease-in-out infinite;">
-            <img src="./assets/beijing-noodles.jpeg" alt="Beijing noodles" class="w-full h-full object-cover"/>
-          </div>
-          <!-- signature red seal stamp -->
-          <div class="absolute -bottom-4 left-2 w-20 md:w-24 rotate-[-12deg] z-30">${renderSeal('w-full h-auto')}</div>
-          <!-- floating rating chip -->
-          <div class="absolute top-6 -left-1 md:left-2 bg-white rounded-2xl shadow-premium px-4 py-3 flex items-center gap-3 z-20 animate-slide-up">
-            <img src="./assets/logo-mark.jpeg" class="w-10 h-10 rounded-xl object-cover" alt="logo"/>
-            <div>
-              <div class="flex text-gold">${renderRatingStars(5)}</div>
-              <p class="text-[11px] text-secondary-light mt-0.5">"Best dumplings in town!"</p>
+        <!-- Hero plate: pasted menu photo with tape, seal & neon OPEN sign -->
+        <div class="lg:col-span-5 relative z-10 px-6 lg:px-0">
+          <div class="relative paper-card rounded-none p-3 rotate-1 max-w-sm mx-auto">
+            <span class="tape -top-3 left-8 -rotate-6"></span>
+            <span class="tape -top-3 right-8 rotate-6"></span>
+            <div class="aspect-[4/5] overflow-hidden border-2 border-ink bg-background-dark">
+              <img src="./assets/dumplings-bowl.jpeg" alt="Hot Meal Bar signature dumplings" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='./assets/dumplings-plate.jpeg'"/>
+            </div>
+            <div class="flex items-center justify-between mt-2 px-1">
+              <span class="font-brush text-teal text-2xl leading-none">招牌水饺</span>
+              <span class="font-display uppercase text-[11px] tracking-[0.18em] text-secondary">Signature</span>
+            </div>
+            <div class="absolute -bottom-7 -left-7 w-24 rotate-[-10deg] z-30">${renderSeal('w-full h-auto')}</div>
+            <div class="absolute -top-5 -right-3 bg-ink border-2 border-ink px-3 py-1.5 -rotate-3 shadow-hard-red">
+              <span class="font-display uppercase tracking-[0.2em] text-sm text-accent-light animate-flicker">&#9679; Open</span>
             </div>
           </div>
         </div>
@@ -122,11 +101,11 @@ export const customerViews = {
           { c: 'success', t: 'Strictly Halal', d: 'A fully certified Halal kitchen — Muslim-friendly Chinese cuisine the whole family can trust.', i: 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
           { c: 'teal', t: 'Hot in 35 minutes', d: 'Cooked to order and rushed to your door in insulated packaging so it lands steaming hot.', i: 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z' }
         ].map(f => `
-          <div class="bg-white rounded-3xl p-7 border border-secondary/10 shadow-premium hover:shadow-premium-hover transition-all">
-            <div class="w-12 h-12 rounded-2xl bg-${f.c}/10 text-${f.c} flex items-center justify-center mb-4">
+          <div class="paper-card rounded-none p-7 interactive-scale">
+            <div class="w-12 h-12 rounded-none border-2 border-ink bg-${f.c} text-white flex items-center justify-center mb-4 shadow-hard">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="${f.i}"/></svg>
             </div>
-            <h3 class="font-display text-xl font-bold text-primary mb-1.5">${f.t}</h3>
+            <h3 class="font-display text-xl font-bold uppercase tracking-tight text-ink mb-1.5">${f.t}</h3>
             <p class="text-sm text-secondary leading-relaxed">${f.d}</p>
           </div>
         `).join('')}
@@ -136,10 +115,10 @@ export const customerViews = {
       <section class="mb-12">
         <div class="flex items-end justify-between mb-5">
           <div>
-            <p class="font-hand text-2xl text-accent leading-none">explore the menu</p>
-            <h2 class="text-3xl font-bold font-display text-primary">What are you craving?</h2>
+            <p class="font-brush text-3xl text-teal leading-none">点菜 · explore the menu</p>
+            <h2 class="text-4xl font-bold font-display uppercase tracking-tight text-ink">What are you craving?</h2>
           </div>
-          <button onclick="window.app.switchView('catalog')" class="text-sm font-semibold text-accent hover:text-accent-dark flex items-center gap-1 cursor-pointer">
+          <button onclick="window.app.switchView('catalog')" class="font-display uppercase tracking-wider text-sm font-semibold text-accent hover:text-ink flex items-center gap-1 cursor-pointer border-b-2 border-accent pb-0.5">
             Full menu
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
           </button>
@@ -152,8 +131,8 @@ export const customerViews = {
       <!-- ===================== BESTSELLERS ===================== -->
       <section id="home-bestsellers" class="mb-16 scroll-mt-28">
         <div class="flex items-center gap-3 mb-6">
-          <span class="bg-spice text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Bestsellers</span>
-          <h2 class="text-3xl font-bold font-display text-primary">Loved by the regulars</h2>
+          <span class="bg-accent text-white text-[11px] font-display font-semibold uppercase tracking-[0.15em] px-3 py-1 border-2 border-ink shadow-hard -rotate-2">Bestsellers</span>
+          <h2 class="text-4xl font-bold font-display uppercase tracking-tight text-ink">Loved by the regulars</h2>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           ${featuredMeals.slice(0, 8).map(meal => renderMealCard(meal)).join('')}
@@ -161,26 +140,25 @@ export const customerViews = {
       </section>
 
       <!-- ===================== HERITAGE STORY ===================== -->
-      <section class="relative bg-primary rounded-[2.5rem] overflow-hidden mb-16 text-white">
-        <div class="absolute inset-0 opacity-20" style="background-image:radial-gradient(circle at 80% 20%, rgba(226,118,27,.5), transparent 45%), radial-gradient(circle at 10% 90%, rgba(30,156,146,.4), transparent 40%);"></div>
+      <section class="relative bg-ink border-2 border-ink shadow-hard overflow-hidden mb-16 text-cream-light">
+        <div class="absolute inset-0 opacity-25" style="background-image:radial-gradient(circle at 80% 20%, rgba(197,54,43,.55), transparent 45%), radial-gradient(circle at 10% 90%, rgba(31,122,92,.45), transparent 40%);"></div>
+        <div class="absolute inset-0 opacity-[0.07]" style="background-image:radial-gradient(rgba(244,234,210,.9) 1px, transparent 1.4px); background-size:16px 16px;"></div>
         <div class="relative grid lg:grid-cols-2 gap-8 items-center p-8 md:p-14">
           <div class="space-y-5">
-            <p class="font-hand text-3xl text-accent-light leading-none">our story</p>
-            <h2 class="font-display text-3xl md:text-4xl font-black leading-tight">A recipe passed down<br/>since 1989.</h2>
-            <p class="text-white/70 leading-relaxed text-sm md:text-base">
+            <p class="font-brush text-4xl text-accent-light leading-none">老字号 · our story</p>
+            <h2 class="font-display text-4xl md:text-5xl font-bold uppercase leading-[0.9] tracking-tight">A recipe passed<br/>down since 1989.</h2>
+            <p class="text-cream-light/70 leading-relaxed text-sm md:text-base max-w-md">
               Hot Meal Bar began as a tiny family stall folding dumplings before sunrise. Three generations later, we still pleat every wrapper by hand and pull our noodles fresh — bringing the warmth of Chinese Muslim home cooking to your table.
             </p>
-            <div class="grid grid-cols-3 gap-4 pt-3">
-              <div><p class="font-display text-3xl font-black text-accent-light">1989</p><p class="text-[11px] text-white/60 uppercase tracking-wider">Est.</p></div>
-              <div><p class="font-display text-3xl font-black text-accent-light"><span data-count="50" data-suffix="+">0</span></p><p class="text-[11px] text-white/60 uppercase tracking-wider">Dishes</p></div>
-              <div><p class="font-display text-3xl font-black text-accent-light"><span data-count="100" data-suffix="%">0</span></p><p class="text-[11px] text-white/60 uppercase tracking-wider">Halal</p></div>
+            <div class="grid grid-cols-3 gap-4 pt-3 max-w-sm">
+              <div class="border-l-2 border-accent pl-3"><p class="font-display text-3xl font-bold text-cream-light">1989</p><p class="text-[10px] text-cream-light/55 uppercase tracking-[0.15em]">Est.</p></div>
+              <div class="border-l-2 border-accent pl-3"><p class="font-display text-3xl font-bold text-cream-light"><span data-count="50" data-suffix="+">0</span></p><p class="text-[10px] text-cream-light/55 uppercase tracking-[0.15em]">Dishes</p></div>
+              <div class="border-l-2 border-accent pl-3"><p class="font-display text-3xl font-bold text-cream-light"><span data-count="100" data-suffix="%">0</span></p><p class="text-[10px] text-cream-light/55 uppercase tracking-[0.15em]">Halal</p></div>
             </div>
-            <button onclick="window.app.switchView('apply')" class="mt-2 bg-white text-primary font-semibold px-7 py-3.5 rounded-2xl hover:bg-background-dark transition-all cursor-pointer active:scale-95 text-sm">
-              Become a campus reseller →
-            </button>
+            <button onclick="window.app.switchView('apply')" class="btn-ghost mt-2 px-7 py-3 text-sm">Become a campus reseller →</button>
           </div>
           <div class="relative flex justify-center">
-            <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-white/95 p-4 shadow-2xl">
+            <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-cream-light border-4 border-ink p-4 shadow-hard">
               <img src="./assets/logo-art.jpeg" alt="Hot Meal Bar 好米巴" class="w-full h-full object-contain rounded-full"/>
             </div>
           </div>
@@ -191,17 +169,18 @@ export const customerViews = {
       <!-- ===================== REVIEWS ===================== -->
       <section class="mb-16">
         <div class="text-center mb-8">
-          <p class="font-hand text-2xl text-accent">kind words</p>
-          <h2 class="text-3xl font-bold font-display text-primary">From our happy diners</h2>
+          <p class="font-brush text-3xl text-teal">食客好评 · kind words</p>
+          <h2 class="text-4xl font-bold font-display uppercase tracking-tight text-ink">From our happy diners</h2>
         </div>
         <div class="grid md:grid-cols-3 gap-5">
           ${reviews.map(r => `
-            <div class="bg-white rounded-3xl p-6 border border-secondary/10 shadow-premium">
+            <div class="paper-card rounded-none p-6 relative">
+              <span class="absolute -top-3 left-5 font-brush text-5xl text-accent/30 leading-none">“</span>
               <div class="flex text-gold mb-3">${renderRatingStars(r.rating)}</div>
               <p class="text-charcoal leading-relaxed text-sm mb-4">"${r.review}"</p>
-              <div class="flex items-center gap-3 pt-3 border-t border-secondary/5">
-                <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm font-display">${r.name.charAt(0)}</div>
-                <div><p class="text-sm font-semibold text-primary">${r.name}</p><p class="text-[11px] text-secondary-light">on ${r.meal}</p></div>
+              <div class="flex items-center gap-3 pt-3 border-t-2 border-dashed border-ink/25">
+                <div class="w-9 h-9 rounded-none border-2 border-ink bg-accent text-white flex items-center justify-center font-bold text-sm font-display">${r.name.charAt(0)}</div>
+                <div><p class="text-sm font-semibold text-ink">${r.name}</p><p class="text-[11px] text-secondary">on ${r.meal}</p></div>
               </div>
             </div>
           `).join('')}
@@ -210,22 +189,22 @@ export const customerViews = {
 
       <!-- ===================== FAST REORDER ===================== -->
       ${recentOrders.some(o => o.meal) ? `
-      <section class="glass-card rounded-[2rem] p-8 border border-secondary/5 mb-4">
-        <h3 class="font-display text-2xl font-bold text-primary mb-1">Order it again</h3>
-        <p class="text-sm text-secondary-light mb-6">Your recent favourites, one tap away.</p>
+      <section class="paper-card rounded-none p-8 mb-4">
+        <h3 class="font-display text-2xl font-bold uppercase tracking-tight text-ink mb-1">Order it again</h3>
+        <p class="text-sm text-secondary mb-6">Your recent favourites, one tap away.</p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           ${recentOrders.map(order => {
             if (!order.meal) return '';
             return `
-              <div class="flex items-center justify-between p-4 bg-background rounded-2xl border border-secondary/5 hover:border-accent/30 hover:bg-white transition-all">
+              <div class="flex items-center justify-between p-4 bg-background border-2 border-ink/15 hover:border-ink transition-all">
                 <div class="flex items-center gap-3 min-w-0">
-                  <img src="${order.meal.image}" alt="${order.meal.mealName}" class="w-12 h-12 rounded-xl object-cover border border-secondary/10" onerror="this.onerror=null;this.src='./assets/dumplings-plate.jpeg'" />
+                  <img src="${order.meal.image}" alt="${order.meal.mealName}" class="w-12 h-12 rounded-none object-cover border-2 border-ink" onerror="this.onerror=null;this.src='./assets/dumplings-plate.jpeg'" />
                   <div class="min-w-0">
-                    <h4 class="font-display font-semibold text-sm text-primary line-clamp-1">${order.meal.mealName}</h4>
-                    <span class="text-xs text-secondary-light">RM ${order.meal.price.toFixed(2)}</span>
+                    <h4 class="font-display font-semibold uppercase text-sm text-ink line-clamp-1">${order.meal.mealName}</h4>
+                    <span class="text-xs text-accent font-semibold">RM ${order.meal.price.toFixed(2)}</span>
                   </div>
                 </div>
-                <button onclick="window.app.addToCart('${order.meal.mealId}'); window.app.openCartDrawer();" class="bg-white hover:bg-accent hover:text-white text-accent border border-accent/20 p-2.5 rounded-xl cursor-pointer transition-all active:scale-90 flex-shrink-0" title="Reorder">
+                <button onclick="window.app.addToCart('${order.meal.mealId}'); window.app.openCartDrawer();" class="bg-cream-light hover:bg-accent hover:text-white text-ink border-2 border-ink p-2.5 rounded-none cursor-pointer transition-all shadow-hard hover:-translate-y-0.5 active:translate-y-0 active:shadow-none flex-shrink-0" title="Reorder">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
                 </button>
               </div>
@@ -253,9 +232,9 @@ export const customerViews = {
       <div class="flex flex-col lg:flex-row gap-8">
         <!-- Sidebar Filters (desktop persistent, mobile collapsible under drawer) -->
         <aside class="w-full lg:w-64 flex-shrink-0 space-y-6">
-          <div class="glass-card rounded-[2rem] p-6 border border-secondary/5 space-y-6">
+          <div class="paper-card rounded-none p-6 space-y-6">
             <div>
-              <h3 class="font-display font-bold text-lg text-primary mb-4">Refine Catalog</h3>
+              <h3 class="font-display font-bold uppercase tracking-tight text-lg text-ink mb-4">Refine Catalog</h3>
               
               <!-- Search -->
               <div class="relative">
@@ -265,7 +244,7 @@ export const customerViews = {
                   value="${catalogFilters.search}" 
                   oninput="window.app.catalogSearch(this.value)"
                   placeholder="Search meals..."
-                  class="w-full pl-10 pr-4 py-2.5 bg-background border border-secondary/10 rounded-xl focus:outline-none focus:border-accent text-sm"
+                  class="w-full pl-10 pr-4 py-2.5 bg-cream-light border-2 border-ink/50 rounded-none focus:outline-none focus:border-accent text-sm"
                 />
                 <svg class="w-4 h-4 text-secondary/40 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
               </div>
@@ -280,7 +259,7 @@ export const customerViews = {
                   return `
                     <button 
                       onclick="window.app.setCatalogCategory('${cat}')"
-                      class="text-left px-3 py-2 rounded-xl text-sm font-medium transition-colors cursor-pointer flex items-center justify-between ${isActive ? 'bg-accent/15 text-accent-dark font-semibold' : 'text-secondary hover:bg-background/60'}"
+                      class="text-left px-3 py-2 rounded-none text-sm font-display uppercase tracking-wide transition-colors cursor-pointer flex items-center justify-between border-2 ${isActive ? 'bg-ink text-cream-light border-ink' : 'text-secondary border-transparent hover:border-ink/30'}"
                     >
                       ${cat}
                       ${isActive ? '<span class="w-1.5 h-1.5 rounded-full bg-accent"></span>' : ''}
@@ -295,7 +274,7 @@ export const customerViews = {
               <h4 class="font-display font-semibold text-xs uppercase tracking-wider text-secondary-light mb-3">Sort By</h4>
               <select 
                 onchange="window.app.catalogSort(this.value)"
-                class="w-full px-3 py-2.5 bg-background border border-secondary/10 rounded-xl text-sm text-secondary focus:outline-none focus:border-accent cursor-pointer"
+                class="w-full px-3 py-2.5 bg-cream-light border-2 border-ink/50 rounded-none text-sm text-ink focus:outline-none focus:border-accent cursor-pointer"
               >
                 <option value="name" ${catalogFilters.sortBy === 'name' ? 'selected' : ''}>Alphabetical</option>
                 <option value="price-asc" ${catalogFilters.sortBy === 'price-asc' ? 'selected' : ''}>Price: Low to High</option>
@@ -309,13 +288,13 @@ export const customerViews = {
         <!-- Main Catalog Results Container -->
         <main class="flex-grow">
           <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold font-display text-primary">Explore Menu</h2>
-            <span class="text-xs text-secondary-light">${results.total} dishes on the menu</span>
+            <div><p class="font-brush text-2xl text-teal leading-none">菜单</p><h2 class="text-3xl font-bold font-display uppercase tracking-tight text-ink">Explore Menu</h2></div>
+            <span class="font-display uppercase tracking-wider text-xs text-secondary border-2 border-ink px-3 py-1.5">${results.total} dishes</span>
           </div>
 
           <!-- Meals Grid -->
           ${results.items.length === 0 ? `
-            <div class="glass-card rounded-[2rem] p-12 text-center text-secondary border border-secondary/5 mt-4">
+            <div class="paper-card rounded-none p-12 text-center text-secondary mt-4">
               <svg class="w-12 h-12 mx-auto mb-4 text-secondary/35" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
               No meals matching your criteria. Try adjusting your filters.
             </div>
@@ -372,7 +351,7 @@ export const customerViews = {
     const reviews = dataLoader.getMealRatings(mealId);
 
     return `
-      <div class="relative bg-white rounded-3xl max-w-4xl w-full mx-4 overflow-hidden border border-secondary/10 shadow-2xl flex flex-col md:flex-row max-h-[90vh] md:max-h-[85vh] animate-slide-up">
+      <div class="relative bg-background-card rounded-none max-w-4xl w-full mx-4 overflow-hidden border-2 border-ink shadow-[8px_8px_0_0_#26201C] flex flex-col md:flex-row max-h-[90vh] md:max-h-[85vh] animate-slide-up">
         
         <!-- Left Pane: Image -->
         <div class="w-full md:w-1/2 aspect-video md:aspect-auto relative bg-background-dark">
@@ -397,8 +376,9 @@ export const customerViews = {
 
           <div class="space-y-5">
             <div>
-              <span class="text-xs font-semibold text-accent uppercase tracking-wider">${meal.category}</span>
-              <h2 class="font-display text-2xl font-bold text-primary mt-1">${meal.mealName}</h2>
+              <span class="inline-block bg-ink text-cream-light text-[10px] font-display uppercase tracking-[0.14em] px-2.5 py-1">${meal.category}</span>
+              <h2 class="font-display text-3xl font-bold uppercase tracking-tight text-ink mt-2">${meal.mealName}</h2>
+              ${meal.nameZh ? `<p class="font-brush text-teal text-2xl leading-none mt-1">${meal.nameZh}</p>` : ''}
               
               <div class="flex items-center gap-2 mt-2">
                 <div class="flex text-accent">${renderRatingStars(meal.rating)}</div>
@@ -417,7 +397,7 @@ export const customerViews = {
             <div>
               <h4 class="font-display text-xs font-bold text-secondary uppercase tracking-wider mb-1.5">Key Ingredients</h4>
               <div class="flex flex-wrap gap-1.5">
-                ${meal.ingredients.map(ing => `<span class="bg-background text-secondary text-[10px] px-2.5 py-1 rounded-md border border-secondary/5 font-medium">${ing}</span>`).join('')}
+                ${meal.ingredients.map(ing => `<span class="bg-cream-light text-ink text-[10px] px-2.5 py-1 rounded-none border-2 border-ink/40 font-display uppercase tracking-wide">${ing}</span>`).join('')}
               </div>
             </div>
 
@@ -441,7 +421,7 @@ export const customerViews = {
                   reviews.map(rev => `
                     <div class="bg-background/50 border border-secondary/5 rounded-xl p-3 space-y-1">
                       <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-primary font-display">${rev.customerName}</span>
+                        <span class="text-xs font-bold text-ink font-display uppercase">${rev.customerName}</span>
                         <div class="flex text-accent">${renderRatingStars(rev.rating)}</div>
                       </div>
                       <p class="text-[11px] text-charcoal-light italic leading-relaxed">"${rev.review}"</p>
@@ -453,17 +433,17 @@ export const customerViews = {
           </div>
 
           <!-- Checkout / Action footer -->
-          <div class="flex items-center justify-between border-t border-secondary/5 pt-4 mt-6">
+          <div class="flex items-center justify-between border-t-2 border-dashed border-ink/25 pt-4 mt-6">
             <div>
-              <span class="text-xs text-secondary-light">Unit Price</span>
-              <span class="text-xl font-extrabold text-primary block font-display">RM ${meal.price.toFixed(2)}</span>
+              <span class="font-display uppercase text-[11px] tracking-[0.14em] text-secondary">Unit Price</span>
+              <span class="text-2xl font-bold text-accent block font-display leading-none">RM ${meal.price.toFixed(2)}</span>
             </div>
             <button 
               onclick="window.app.addToCart('${meal.mealId}'); window.app.closeMealDetails();"
-              class="bg-accent hover:bg-accent-dark text-white font-semibold text-sm px-6 py-3 rounded-2xl shadow-accent-glow hover:shadow-none transition-all cursor-pointer active:scale-95 flex items-center gap-2"
+              class="btn-stamp text-sm px-6 py-3"
             >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-              Add to Cart
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+              Add to Order
             </button>
           </div>
         </div>
@@ -484,14 +464,14 @@ export const customerViews = {
       drawerContainer.innerHTML = `
         <div class="py-24 text-center text-secondary">
           <svg class="w-16 h-16 mx-auto mb-4 text-secondary/20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
-          <p class="font-display font-semibold text-primary mb-1">Your cart is empty</p>
-          <p class="text-xs text-secondary-light">Explore our catalog and add hot meals.</p>
+          <p class="font-display font-semibold uppercase text-ink mb-1">Your cart is empty</p>
+          <p class="text-xs text-secondary">Explore our menu and add hot meals.</p>
         </div>
       `;
       footerContainer.innerHTML = `
         <button 
           onclick="window.app.closeCartDrawer(); window.app.switchView('catalog');" 
-          class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-3.5 rounded-2xl transition-all cursor-pointer text-sm"
+          class="btn-stamp w-full py-3.5 text-sm"
         >
           Browse Meals
         </button>
@@ -504,24 +484,24 @@ export const customerViews = {
       const meal = store.state.meals.find(m => m.mealId === item.mealId);
       if (!meal) return '';
       return `
-        <div class="flex items-center gap-4 p-3.5 bg-background rounded-2xl border border-secondary/5">
-          <img src="${meal.image}" alt="${meal.mealName}" class="w-16 h-16 rounded-xl object-cover border border-secondary/10" />
+        <div class="flex items-center gap-4 p-3.5 bg-cream-light border-2 border-ink/15">
+          <img src="${meal.image}" alt="${meal.mealName}" class="w-16 h-16 rounded-none object-cover border-2 border-ink" onerror="this.onerror=null;this.src='./assets/dumplings-plate.jpeg'" />
           <div class="flex-grow min-w-0">
-            <h4 class="font-display font-semibold text-sm text-primary truncate">${meal.mealName}</h4>
-            <span class="text-xs text-secondary-light block mb-2">RM ${meal.price.toFixed(2)}</span>
+            <h4 class="font-display font-semibold uppercase text-sm text-ink truncate">${meal.mealName}</h4>
+            <span class="text-xs text-accent font-semibold block mb-2">RM ${meal.price.toFixed(2)}</span>
             
             <!-- Adjust Qty -->
             <div class="flex items-center gap-3">
               <button 
                 onclick="window.app.updateCartQuantity('${meal.mealId}', ${item.quantity - 1})"
-                class="w-7 h-7 bg-white border border-secondary/15 rounded-lg text-primary hover:bg-background-dark transition-all flex items-center justify-center cursor-pointer text-sm font-bold active:scale-90"
+                class="w-7 h-7 bg-background-card border-2 border-ink rounded-none text-ink hover:bg-accent hover:text-white transition-all flex items-center justify-center cursor-pointer text-sm font-bold active:scale-90"
               >
                 -
               </button>
               <span class="text-xs font-semibold text-primary w-4 text-center">${item.quantity}</span>
               <button 
                 onclick="window.app.updateCartQuantity('${meal.mealId}', ${item.quantity + 1})"
-                class="w-7 h-7 bg-white border border-secondary/15 rounded-lg text-primary hover:bg-background-dark transition-all flex items-center justify-center cursor-pointer text-sm font-bold active:scale-90"
+                class="w-7 h-7 bg-background-card border-2 border-ink rounded-none text-ink hover:bg-accent hover:text-white transition-all flex items-center justify-center cursor-pointer text-sm font-bold active:scale-90"
               >
                 +
               </button>
@@ -547,22 +527,22 @@ export const customerViews = {
 
     footerContainer.innerHTML = `
       <div class="space-y-2.5 mb-6 text-xs">
-        <div class="flex items-center justify-between text-secondary-light">
+        <div class="flex items-center justify-between text-secondary">
           <span>Subtotal</span>
           <span>RM ${subtotal.toFixed(2)}</span>
         </div>
-        <div class="flex items-center justify-between text-secondary-light">
+        <div class="flex items-center justify-between text-secondary">
           <span>Delivery Fee</span>
           <span>RM ${deliveryFee.toFixed(2)}</span>
         </div>
-        <div class="flex items-center justify-between text-sm font-bold text-primary pt-2.5 border-t border-secondary/10">
-          <span>Total Price</span>
-          <span class="font-display">RM ${total.toFixed(2)}</span>
+        <div class="flex items-center justify-between text-base font-bold text-ink pt-2.5 border-t-2 border-dashed border-ink/30 font-display uppercase">
+          <span>Total</span>
+          <span class="text-accent">RM ${total.toFixed(2)}</span>
         </div>
       </div>
       <button 
         onclick="window.app.switchView('checkout'); window.app.closeCartDrawer();" 
-        class="w-full bg-accent hover:bg-accent-dark text-white font-semibold py-3.5 rounded-2xl shadow-accent-glow hover:shadow-none transition-all cursor-pointer text-sm"
+        class="btn-stamp w-full py-3.5 text-sm"
       >
         Proceed to Checkout
       </button>
@@ -574,10 +554,10 @@ export const customerViews = {
     const cart = store.state.cart;
     if (cart.length === 0) {
       container.innerHTML = `
-        <div class="glass-card rounded-[2rem] p-12 text-center text-secondary border border-secondary/5 mt-4">
-          <p class="font-display font-bold text-lg text-primary mb-2">Checkout is unavailable</p>
-          <p class="text-xs text-secondary-light mb-6">Your shopping cart is currently empty.</p>
-          <button onclick="window.app.switchView('catalog')" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-xl text-xs">Explore Menu</button>
+        <div class="paper-card rounded-none p-12 text-center text-secondary mt-4">
+          <p class="font-display font-bold uppercase text-lg text-ink mb-2">Checkout is unavailable</p>
+          <p class="text-xs text-secondary mb-6">Your shopping cart is currently empty.</p>
+          <button onclick="window.app.switchView('catalog')" class="btn-stamp px-6 py-2.5 text-xs">Explore Menu</button>
         </div>
       `;
       return;
@@ -591,8 +571,8 @@ export const customerViews = {
       <div class="flex flex-col lg:flex-row gap-8">
         <!-- Delivery forms pane -->
         <main class="flex-grow">
-          <div class="glass-card rounded-[2rem] p-6 md:p-8 border border-secondary/5 space-y-6">
-            <h2 class="font-display text-2xl font-bold text-primary border-b border-secondary/5 pb-4">Delivery Details</h2>
+          <div class="paper-card rounded-none p-6 md:p-8 space-y-6">
+            <h2 class="font-display text-3xl font-bold uppercase tracking-tight text-ink border-b-2 border-dashed border-ink/25 pb-4">Delivery Details</h2>
             
             <form id="checkoutForm" onsubmit="event.preventDefault(); window.app.submitCheckout(new FormData(this))" class="space-y-4">
               <!-- Name & Phone -->
@@ -603,43 +583,39 @@ export const customerViews = {
                 </div>
                 <div class="space-y-1">
                   <label class="text-xs font-semibold text-secondary-light block">Phone Number</label>
-                  <input type="tel" name="phone" required placeholder="+1 (555) 019-2834" class="form-input-premium text-sm py-2.5" />
+                  <input type="tel" name="phone" required placeholder="+60 12-345 6789" class="form-input-premium text-sm py-2.5" />
                 </div>
               </div>
 
               <!-- Address -->
               <div class="space-y-1">
                 <label class="text-xs font-semibold text-secondary-light block">Delivery Address</label>
-                <input type="text" name="address" required placeholder="Apt 4B, 742 Evergreen Terrace, Metropolis" class="form-input-premium text-sm py-2.5" />
+                <input type="text" name="address" required placeholder="12 Jalan Sultan, 50000 Kuala Lumpur" class="form-input-premium text-sm py-2.5" />
               </div>
 
               <!-- Payment Method selection -->
               <div class="pt-4 border-t border-secondary/5">
-                <h3 class="font-display font-semibold text-sm text-primary mb-3">Payment Method</h3>
+                <h3 class="font-display font-semibold uppercase tracking-wide text-sm text-ink mb-3">Payment Method</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <label class="flex items-center gap-3 p-4 bg-background border border-secondary/15 rounded-2xl cursor-pointer hover:border-accent/40 transition-colors">
+                  <label class="flex items-center gap-3 p-4 bg-cream-light border-2 border-ink/40 rounded-none cursor-pointer hover:border-accent transition-colors">
                     <input type="radio" name="payment" value="card" checked class="accent-accent" />
-                    <span class="text-sm font-medium text-primary font-display">Credit / Debit Card</span>
+                    <span class="text-sm font-medium text-ink font-display uppercase tracking-wide">Card</span>
                   </label>
-                  <label class="flex items-center gap-3 p-4 bg-background border border-secondary/15 rounded-2xl cursor-pointer hover:border-accent/40 transition-colors">
+                  <label class="flex items-center gap-3 p-4 bg-cream-light border-2 border-ink/40 rounded-none cursor-pointer hover:border-accent transition-colors">
                     <input type="radio" name="payment" value="wallet" class="accent-accent" />
-                    <span class="text-sm font-medium text-primary font-display">Digital Wallet</span>
+                    <span class="text-sm font-medium text-ink font-display uppercase tracking-wide">E-Wallet</span>
                   </label>
-                  <label class="flex items-center gap-3 p-4 bg-background border border-secondary/15 rounded-2xl cursor-pointer hover:border-accent/40 transition-colors">
+                  <label class="flex items-center gap-3 p-4 bg-cream-light border-2 border-ink/40 rounded-none cursor-pointer hover:border-accent transition-colors">
                     <input type="radio" name="payment" value="cash" class="accent-accent" />
-                    <span class="text-sm font-medium text-primary font-display">Cash on Delivery</span>
+                    <span class="text-sm font-medium text-ink font-display uppercase tracking-wide">Cash (COD)</span>
                   </label>
                 </div>
               </div>
 
               <!-- Action buttons -->
-              <div class="pt-6 border-t border-secondary/5 flex justify-end gap-3">
-                <button type="button" onclick="window.app.switchView('catalog')" class="px-6 py-3 border border-secondary/15 rounded-2xl text-secondary hover:bg-background-dark font-medium text-sm transition-all cursor-pointer">
-                  Cancel
-                </button>
-                <button type="submit" class="px-8 py-3 bg-accent hover:bg-accent-dark text-white font-semibold rounded-2xl shadow-accent-glow hover:shadow-none transition-all cursor-pointer text-sm">
-                  Place Order (RM ${total.toFixed(2)})
-                </button>
+              <div class="pt-6 border-t-2 border-dashed border-ink/25 flex justify-end gap-3">
+                <button type="button" onclick="window.app.switchView('catalog')" class="btn-ghost px-6 py-3 text-sm">Cancel</button>
+                <button type="submit" class="btn-stamp px-8 py-3 text-sm">Place Order · RM ${total.toFixed(2)}</button>
               </div>
             </form>
           </div>
@@ -647,8 +623,8 @@ export const customerViews = {
 
         <!-- Right Summary side pane -->
         <aside class="w-full lg:w-96 flex-shrink-0">
-          <div class="glass-card rounded-[2rem] p-6 border border-secondary/5 space-y-6">
-            <h3 class="font-display font-bold text-lg text-primary border-b border-secondary/5 pb-4">Order Summary</h3>
+          <div class="paper-card rounded-none p-6 space-y-6">
+            <h3 class="font-display font-bold uppercase tracking-tight text-lg text-ink border-b-2 border-dashed border-ink/25 pb-4">Order Summary</h3>
             
             <!-- Items list -->
             <div class="space-y-4 max-h-[240px] overflow-y-auto pr-1">
@@ -658,10 +634,10 @@ export const customerViews = {
                 return `
                   <div class="flex items-center justify-between text-xs">
                     <div class="flex items-center gap-2.5">
-                      <img src="${meal.image}" alt="${meal.mealName}" class="w-10 h-10 rounded-lg object-cover" />
+                      <img src="${meal.image}" alt="${meal.mealName}" class="w-10 h-10 rounded-none object-cover border-2 border-ink" onerror="this.onerror=null;this.src='./assets/dumplings-plate.jpeg'" />
                       <div>
-                        <span class="font-bold text-primary font-display line-clamp-1">${meal.mealName}</span>
-                        <span class="text-secondary-light">Qty: ${item.quantity}</span>
+                        <span class="font-bold text-ink font-display uppercase line-clamp-1">${meal.mealName}</span>
+                        <span class="text-secondary">Qty: ${item.quantity}</span>
                       </div>
                     </div>
                     <span class="font-semibold text-primary font-display">RM ${(meal.price * item.quantity).toFixed(2)}</span>
@@ -680,9 +656,9 @@ export const customerViews = {
                 <span>Delivery Fee</span>
                 <span>RM ${deliveryFee.toFixed(2)}</span>
               </div>
-              <div class="flex items-center justify-between text-sm font-bold text-primary pt-2.5 border-t border-secondary/10">
-                <span>Total Amount</span>
-                <span class="font-display">RM ${total.toFixed(2)}</span>
+              <div class="flex items-center justify-between text-base font-bold text-ink pt-2.5 border-t-2 border-dashed border-ink/30 font-display uppercase">
+                <span>Total</span>
+                <span class="text-accent">RM ${total.toFixed(2)}</span>
               </div>
             </div>
           </div>
@@ -706,10 +682,10 @@ export const customerViews = {
     
     if (!activeOrder) {
       container.innerHTML = `
-        <div class="glass-card rounded-[2rem] p-12 text-center text-secondary border border-secondary/5 mt-4">
-          <p class="font-display font-bold text-lg text-primary mb-2">No active orders</p>
-          <p class="text-xs text-secondary-light mb-6">You have no active orders being prepared or delivered right now.</p>
-          <button onclick="window.app.switchView('catalog')" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-xl text-xs">Explore Menu</button>
+        <div class="paper-card rounded-none p-12 text-center text-secondary mt-4">
+          <p class="font-display font-bold uppercase text-lg text-ink mb-2">No active orders</p>
+          <p class="text-xs text-secondary mb-6">You have no active orders being prepared or delivered right now.</p>
+          <button onclick="window.app.switchView('catalog')" class="btn-stamp px-6 py-2.5 text-xs">Explore Menu</button>
         </div>
       `;
       return;
@@ -722,15 +698,15 @@ export const customerViews = {
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Timeline and steps -->
         <main class="lg:col-span-2 space-y-6">
-          <div class="glass-card rounded-[2rem] p-6 md:p-8 border border-secondary/5 space-y-8">
-            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-secondary/5 pb-5 gap-3">
+          <div class="paper-card rounded-none p-6 md:p-8 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b-2 border-dashed border-ink/25 pb-5 gap-3">
               <div>
-                <span class="text-[10px] text-accent font-semibold uppercase tracking-wider">Live tracking</span>
-                <h2 class="font-display text-2xl font-bold text-primary mt-0.5">Order #${activeOrder.orderId.substring(4) || activeOrder.orderId}</h2>
+                <span class="eyebrow">● Live tracking</span>
+                <h2 class="font-display text-3xl font-bold uppercase tracking-tight text-ink mt-0.5">Order #${activeOrder.orderId.substring(4) || activeOrder.orderId}</h2>
               </div>
               <div class="text-left md:text-right">
-                <span class="text-xs text-secondary-light block">Est. Arrival Time</span>
-                <span class="text-lg font-bold text-primary font-display">${tracking ? tracking.estimatedTime : '--:--'}</span>
+                <span class="text-[11px] text-secondary block uppercase tracking-wider">Est. Arrival</span>
+                <span class="text-2xl font-bold text-accent font-display">${tracking ? tracking.estimatedTime : '--:--'}</span>
               </div>
             </div>
 
@@ -745,28 +721,28 @@ export const customerViews = {
         <!-- Right detail card panel (driver, ratings if arrived) -->
         <aside class="space-y-6">
           <!-- Order summary -->
-          <div class="glass-card rounded-[2rem] p-6 border border-secondary/5 space-y-5">
-            <h3 class="font-display font-bold text-lg text-primary border-b border-secondary/5 pb-4">Delivery Address</h3>
+          <div class="paper-card rounded-none p-6 space-y-5">
+            <h3 class="font-display font-bold uppercase tracking-tight text-lg text-ink border-b-2 border-dashed border-ink/25 pb-4">Delivery Address</h3>
             <div class="text-xs text-charcoal space-y-2 leading-relaxed">
-              <p><strong class="text-primary">Recurrent:</strong> ${tracking && tracking.details ? tracking.details.name : 'Evelyn Sterling'}</p>
-              <p><strong class="text-primary">Contact:</strong> ${tracking && tracking.details ? tracking.details.phone : '+1 (555) 019-2834'}</p>
-              <p><strong class="text-primary">Address:</strong> ${tracking && tracking.details ? tracking.details.address : 'Apt 4B, 742 Evergreen Terrace, Metropolis'}</p>
+              <p><strong class="text-ink font-display uppercase">Name:</strong> ${tracking && tracking.details ? tracking.details.name : 'Nurul Aisyah'}</p>
+              <p><strong class="text-ink font-display uppercase">Contact:</strong> ${tracking && tracking.details ? tracking.details.phone : '+60 12-345 6789'}</p>
+              <p><strong class="text-ink font-display uppercase">Address:</strong> ${tracking && tracking.details ? tracking.details.address : '12 Jalan Sultan, 50000 Kuala Lumpur'}</p>
             </div>
           </div>
 
           <!-- Add Review Form (Activated ONLY when order status === 'delivered') -->
           ${activeOrder.status === 'delivered' ? `
-            <div class="glass-card rounded-[2rem] p-6 border border-success/20 bg-success/5 animate-slide-up space-y-4">
+            <div class="paper-card rounded-none p-6 border-l-4 border-l-success animate-slide-up space-y-4">
               <div>
-                <h4 class="font-display font-bold text-base text-primary">Enjoyed your ${meal ? meal.mealName : 'meal'}?</h4>
-                <p class="text-[11px] text-secondary-light mt-0.5">Please share your experience with us.</p>
+                <h4 class="font-display font-bold uppercase text-base text-ink">Enjoyed your ${meal ? meal.mealName : 'meal'}?</h4>
+                <p class="text-[11px] text-secondary mt-0.5">Please share your experience with us.</p>
               </div>
 
               <form onsubmit="event.preventDefault(); window.app.submitRating('${activeOrder.mealId}', this.rating.value, this.review.value)" class="space-y-3">
                 <!-- Stars select -->
                 <div class="flex items-center gap-1">
                   <span class="text-xs text-secondary-light mr-2">Your Rating:</span>
-                  <select name="rating" required class="bg-white border border-secondary/15 rounded-lg text-xs px-2.5 py-1 focus:outline-none">
+                  <select name="rating" required class="bg-cream-light border-2 border-ink rounded-none text-xs px-2.5 py-1 focus:outline-none">
                     <option value="5">5 Stars (Excellent)</option>
                     <option value="4">4 Stars (Good)</option>
                     <option value="3">3 Stars (Average)</option>
@@ -780,25 +756,25 @@ export const customerViews = {
                   name="review" 
                   rows="3" 
                   placeholder="Tell us what you liked or how we can improve..." 
-                  class="form-input-premium text-xs py-2 bg-white"
+                  class="form-input-premium text-xs py-2"
                   required
                 ></textarea>
 
-                <button type="submit" class="w-full bg-success hover:bg-success-dark text-white font-semibold py-2.5 rounded-xl transition-all cursor-pointer text-xs shadow-md">
+                <button type="submit" class="w-full bg-success text-white font-display uppercase tracking-wider font-semibold py-2.5 rounded-none border-2 border-ink shadow-hard transition-all cursor-pointer text-xs hover:-translate-y-0.5 active:translate-y-0 active:shadow-none">
                   Submit Review
                 </button>
               </form>
             </div>
           ` : `
-            <div class="glass-card rounded-[2rem] p-6 border border-secondary/5 text-center py-8">
-              <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center text-accent mx-auto mb-3">
+            <div class="paper-card rounded-none p-6 text-center py-8">
+              <div class="w-10 h-10 bg-accent text-white border-2 border-ink rounded-none flex items-center justify-center mx-auto mb-3">
                 <svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
               </div>
-              <h4 class="font-display font-semibold text-sm text-primary mb-1">Cooking & Preparation</h4>
-              <p class="text-[10px] text-secondary-light">Review submittal unlocks automatically upon delivery confirmation.</p>
+              <h4 class="font-display font-semibold uppercase text-sm text-ink mb-1">Cooking & Preparation</h4>
+              <p class="text-[10px] text-secondary">Review unlocks automatically upon delivery confirmation.</p>
             </div>
           `}
         </aside>
@@ -808,14 +784,15 @@ export const customerViews = {
 
   renderApplyJob(container) {
     container.innerHTML = `
-      <section class="relative bg-primary rounded-[2rem] overflow-hidden mb-12 p-8 md:p-16 shadow-premium text-white">
-        <div class="absolute inset-0 bg-gradient-to-r from-primary-dark/80 to-transparent z-0"></div>
+      <section class="relative bg-ink border-2 border-ink shadow-hard overflow-hidden mb-12 p-8 md:p-16 text-cream-light">
+        <div class="absolute inset-0 opacity-25" style="background-image:radial-gradient(circle at 85% 15%, rgba(197,54,43,.6), transparent 45%), radial-gradient(circle at 5% 95%, rgba(31,122,92,.45), transparent 40%);"></div>
+        <div class="absolute inset-0 opacity-[0.07]" style="background-image:radial-gradient(rgba(244,234,210,.9) 1px, transparent 1.4px); background-size:16px 16px;"></div>
         <div class="max-w-2xl relative z-10 space-y-5">
-          <span class="text-accent bg-accent/15 border border-accent/20 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Opportunity</span>
-          <h1 class="font-display text-3xl md:text-4xl lg:text-5xl text-white font-extrabold leading-tight">
-            Earn Extra Pocket Money as a <span class="text-accent">Dumpling Reseller</span>
+          <span class="inline-block bg-accent text-white border-2 border-cream-light px-3 py-1 text-xs font-display uppercase tracking-[0.16em] -rotate-2">Now Hiring</span>
+          <h1 class="font-display text-4xl md:text-5xl lg:text-6xl text-cream-light font-bold uppercase leading-[0.9] tracking-tight">
+            Earn pocket money as a <span class="text-accent-light">Dumpling Reseller</span>
           </h1>
-          <p class="text-secondary-light text-sm md:text-base leading-relaxed">
+          <p class="text-cream-light/70 text-sm md:text-base leading-relaxed">
             University students can join our reseller programme — sell premium frozen dumplings to your campus community and earn commission on every order.
           </p>
         </div>
@@ -823,8 +800,8 @@ export const customerViews = {
 
       <div class="flex flex-col lg:flex-row gap-8">
         <aside class="w-full lg:w-80 flex-shrink-0">
-          <div class="glass-card rounded-[2rem] p-6 border border-secondary/5 space-y-5">
-            <h3 class="font-display font-bold text-lg text-primary">Why Join Us?</h3>
+          <div class="paper-card rounded-none p-6 space-y-5">
+            <h3 class="font-display font-bold uppercase tracking-tight text-lg text-ink">Why Join Us?</h3>
             <div class="space-y-4">
               <div class="flex items-start gap-3">
                 <div class="w-9 h-9 bg-accent/10 rounded-xl flex items-center justify-center text-accent flex-shrink-0 mt-0.5">
@@ -867,8 +844,8 @@ export const customerViews = {
         </aside>
 
         <main class="flex-grow">
-          <div class="glass-card rounded-[2rem] p-6 md:p-8 border border-secondary/5 space-y-6">
-            <h2 class="font-display text-2xl font-bold text-primary border-b border-secondary/5 pb-4">Student Reseller Application</h2>
+          <div class="paper-card rounded-none p-6 md:p-8 space-y-6">
+            <h2 class="font-display text-3xl font-bold uppercase tracking-tight text-ink border-b-2 border-dashed border-ink/25 pb-4">Student Reseller Application</h2>
             <form id="applyJobForm" onsubmit="event.preventDefault(); window.app.submitApplication(new FormData(this))" class="space-y-4">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="space-y-1">
@@ -910,9 +887,9 @@ export const customerViews = {
                   <span class="text-xs text-secondary-light leading-relaxed">I confirm that I am a registered university student and agree to the reseller programme terms and conditions.</span>
                 </label>
               </div>
-              <div class="pt-6 border-t border-secondary/5 flex justify-end gap-3">
-                <button type="button" onclick="window.app.switchView('home')" class="px-6 py-3 border border-secondary/15 rounded-2xl text-secondary hover:bg-background-dark font-medium text-sm transition-all cursor-pointer">Cancel</button>
-                <button type="submit" class="px-8 py-3 bg-accent hover:bg-accent-dark text-white font-semibold rounded-2xl shadow-accent-glow hover:shadow-none transition-all cursor-pointer text-sm">Submit Application</button>
+              <div class="pt-6 border-t-2 border-dashed border-ink/25 flex justify-end gap-3">
+                <button type="button" onclick="window.app.switchView('home')" class="btn-ghost px-6 py-3 text-sm">Cancel</button>
+                <button type="submit" class="btn-stamp px-8 py-3 text-sm">Submit Application</button>
               </div>
             </form>
           </div>

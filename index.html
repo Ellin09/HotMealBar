@@ -7,10 +7,10 @@
   <title>Hot Meal Bar 好米巴 · Halal Chinese Kitchen Since 1989</title>
   <link rel="icon" type="image/jpeg" href="./assets/logo-mark.jpeg">
 
-  <!-- Fonts: characterful serif display + clean body + handwritten accents -->
+  <!-- Fonts: condensed grotesque headlines + Chinese brush + clean body + handwritten chalk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Ma+Shan+Zheng&family=Oswald:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Tailwind Play CDN (compiles in-browser — no build step required) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -19,39 +19,49 @@
       theme: {
         extend: {
           colors: {
-            primary:   { DEFAULT: '#16284D', light: '#294A82', dark: '#0B1730' },
-            secondary: { DEFAULT: '#4A5A72', light: '#7A8AA3', dark: '#313E52' },
-            accent:    { DEFAULT: '#E2761B', light: '#F59B3D', dark: '#BF5E0E' },
-            teal:      { DEFAULT: '#1E9C92', light: '#35BDB2', dark: '#14736B' },
-            gold:      { DEFAULT: '#E0A526', light: '#F0C45A', dark: '#B9831A' },
-            spice:     { DEFAULT: '#D7443E', light: '#E86A64', dark: '#AE2F2A' },
-            background:{ DEFAULT: '#FBF6EE', card: '#FFFFFF', dark: '#F0E7D7' },
-            charcoal:  { DEFAULT: '#2A2622', light: '#5C544B', dark: '#15120F' },
-            success:   { DEFAULT: '#2A9D8F', light: '#48B3A6', dark: '#1E756B' }
+            // Cha Chaan Teng palette — ink, chili red, jade, brass on cream paper
+            primary:   { DEFAULT: '#26201C', light: '#4C4138', dark: '#171210' },
+            secondary: { DEFAULT: '#7A6A58', light: '#A89478', dark: '#574A3C' },
+            accent:    { DEFAULT: '#C5362B', light: '#DC5A4D', dark: '#9E2820' },
+            teal:      { DEFAULT: '#1F7A5C', light: '#2E9E78', dark: '#155C45' },
+            gold:      { DEFAULT: '#C2982F', light: '#DFB752', dark: '#9C7820' },
+            spice:     { DEFAULT: '#E0552D', light: '#F0784F', dark: '#B43F1D' },
+            background:{ DEFAULT: '#F4EAD2', card: '#FCF6E8', dark: '#EADCBC' },
+            charcoal:  { DEFAULT: '#2B2420', light: '#5C5147', dark: '#171210' },
+            success:   { DEFAULT: '#2E8B57', light: '#46A973', dark: '#1F6B40' },
+            ink:       { DEFAULT: '#26201C', light: '#4C4138', dark: '#120E0B' },
+            cream:     { DEFAULT: '#F4EAD2', light: '#FCF6E8', dark: '#EADCBC' }
           },
           fontFamily: {
             sans:    ['"Plus Jakarta Sans"', 'sans-serif'],
-            display: ['Fraunces', 'serif'],
+            display: ['Oswald', '"Arial Narrow"', 'sans-serif'],
+            brush:   ['"Ma Shan Zheng"', 'cursive'],
             hand:    ['Caveat', 'cursive']
           },
           boxShadow: {
-            premium: '0 18px 40px -22px rgba(22, 40, 77, 0.22)',
-            'premium-hover': '0 30px 60px -24px rgba(22, 40, 77, 0.30)',
-            'accent-glow': '0 12px 28px -8px rgba(226, 118, 27, 0.45)'
+            premium: '4px 4px 0 0 rgba(38, 32, 28, 0.14)',
+            'premium-hover': '7px 7px 0 0 rgba(38, 32, 28, 0.18)',
+            'accent-glow': '4px 4px 0 0 rgba(158, 40, 32, 0.55)',
+            'hard': '4px 4px 0 0 #26201C',
+            'hard-red': '4px 4px 0 0 #9E2820'
           },
           keyframes: {
             slideUp: { '0%': { opacity: '0', transform: 'translateY(22px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
             fadeIn:  { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
             floaty:  { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-14px)' } },
             steam:   { '0%': { opacity: '0', transform: 'translateY(0) scaleX(1)' }, '40%': { opacity: '.5' }, '100%': { opacity: '0', transform: 'translateY(-26px) scaleX(1.6)' } },
-            marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } }
+            marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            stampIn: { '0%': { opacity: '0', transform: 'scale(1.6) rotate(-18deg)' }, '60%': { opacity: '1', transform: 'scale(.92) rotate(-10deg)' }, '100%': { opacity: '1', transform: 'scale(1) rotate(-8deg)' } },
+            flicker: { '0%,18%,22%,25%,53%,57%,100%': { opacity: '1' }, '20%,24%,55%': { opacity: '.45' } }
           },
           animation: {
             'slide-up': 'slideUp .5s cubic-bezier(.16,1,.3,1) forwards',
             'fade-in': 'fadeIn .4s ease-out forwards',
             'floaty': 'floaty 6s ease-in-out infinite',
             'steam': 'steam 3s ease-out infinite',
-            'marquee': 'marquee 28s linear infinite'
+            'marquee': 'marquee 28s linear infinite',
+            'stamp-in': 'stampIn .5s cubic-bezier(.16,1,.3,1) forwards',
+            'flicker': 'flicker 4s linear infinite'
           }
         }
       }
@@ -61,38 +71,81 @@
   <style type="text/tailwindcss">
     @layer base {
       body { @apply bg-background text-charcoal font-sans antialiased selection:bg-accent selection:text-white; }
-      h1,h2,h3,h4,h5,h6 { @apply font-display text-primary; }
+      h1,h2,h3,h4,h5,h6 { @apply font-display text-primary; letter-spacing: -0.01em; }
     }
     @layer components {
-      .glass-card { @apply bg-white/80 backdrop-blur-md border border-white/60 shadow-premium; }
-      .interactive-scale { @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-premium-hover; }
-      .form-input-premium { @apply w-full px-4 py-3 bg-white border border-secondary/20 rounded-xl focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all text-charcoal; }
+      /* Paper menu card with a hard ink border + offset shadow (no glassmorphism) */
+      .glass-card { @apply bg-background-card border-2 border-ink shadow-hard; }
+      .paper-card { @apply bg-background-card border-2 border-ink shadow-hard; }
+      .interactive-scale { @apply transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-premium-hover; }
+      .form-input-premium { @apply w-full px-4 py-3 bg-background-card border-2 border-ink/70 rounded-none focus:outline-none focus:border-accent focus:ring-0 transition-all text-charcoal; }
+      .eyebrow { @apply font-display uppercase tracking-[0.22em] text-accent text-xs font-semibold; }
+      .ink-border { @apply border-2 border-ink; }
+      /* Retro stamped button: red fill, ink border, hard shadow that 'presses' on click */
+      .btn-stamp { @apply inline-flex items-center justify-center gap-2 font-display uppercase tracking-[0.12em] font-semibold border-2 border-ink bg-accent text-white shadow-hard transition-all duration-150 cursor-pointer hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-premium-hover active:translate-x-0 active:translate-y-0 active:shadow-none; }
+      .btn-ghost { @apply inline-flex items-center justify-center gap-2 font-display uppercase tracking-[0.12em] font-semibold border-2 border-ink bg-background-card text-ink shadow-hard transition-all duration-150 cursor-pointer hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-premium-hover active:translate-x-0 active:translate-y-0 active:shadow-none; }
     }
   </style>
 
   <style>
-    /* Warm paper-grain backdrop — gives a hand-crafted, non-template feel */
+    /* Cream paper backdrop with halftone dots + faint grain — a printed-menu feel */
     body {
-      background-color: #FBF6EE;
+      background-color: #F4EAD2;
       background-image:
-        radial-gradient(circle at 12% 18%, rgba(30,156,146,0.07), transparent 42%),
-        radial-gradient(circle at 88% 8%, rgba(226,118,27,0.08), transparent 40%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+        radial-gradient(circle at 12% 16%, rgba(31,122,92,0.06), transparent 40%),
+        radial-gradient(circle at 88% 6%, rgba(197,54,43,0.06), transparent 38%),
+        radial-gradient(rgba(38,32,28,0.06) 1px, transparent 1.4px),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      background-size: auto, auto, 18px 18px, 120px 120px;
     }
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(74,90,114,.25); border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(74,90,114,.45); }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: #EADCBC; }
+    ::-webkit-scrollbar-thumb { background: #26201C; border: 2px solid #EADCBC; }
+    ::-webkit-scrollbar-thumb:hover { background: #C5362B; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     .shimmer-loading { background: linear-gradient(90deg,#f3efe7 25%,#ece6da 50%,#f3efe7 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite linear; }
     @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
     .map-pulse::after { content:''; position:absolute; inset:0; border-radius:50%; background: rgba(226,118,27,.3); animation: pulse-ring 1.5s cubic-bezier(.215,.61,.355,1) infinite; }
     @keyframes pulse-ring { 0% { transform: scale(.33);} 80%,100% { opacity:0; } }
-    /* Hand-drawn noodle divider */
+    /* Hand-drawn noodle divider (chili red) */
     .noodle-divider { height: 18px; width: 100%; background-repeat: repeat-x; background-size: 64px 18px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='18'%3E%3Cpath d='M0 9 C 16 -2, 16 20, 32 9 S 48 -2, 64 9' fill='none' stroke='%23E2761B' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E"); }
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='18'%3E%3Cpath d='M0 9 C 16 -2, 16 20, 32 9 S 48 -2, 64 9' fill='none' stroke='%23C5362B' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E"); }
     .text-balance { text-wrap: balance; }
+
+    /* ===== Cha Chaan Teng retro utilities ===== */
+    /* Perforated ticket edge (top & bottom scalloped cut, like a torn receipt) */
+    .ticket-edge { position: relative; }
+    .ticket-edge::before, .ticket-edge::after {
+      content: ''; position: absolute; left: 0; right: 0; height: 9px; z-index: 1;
+      background-image: radial-gradient(circle at 6px 50%, #F4EAD2 5px, transparent 5.5px);
+      background-size: 16px 9px; background-repeat: repeat-x;
+    }
+    .ticket-edge::before { top: -1px; }
+    .ticket-edge::after { bottom: -1px; transform: rotate(180deg); }
+
+    /* Dotted price leader: <span>name</span><i class="menu-dots"></i><span>RM x</span> */
+    .menu-dots { flex: 1 1 auto; align-self: flex-end; border-bottom: 3px dotted rgba(38,32,28,.32); margin: 0 .5rem 5px; min-width: 18px; }
+
+    /* Rubber-stamp badge (rotated, ringed) */
+    .stamp { display: inline-flex; align-items: center; justify-content: center; text-align: center;
+      border: 2.5px solid currentColor; border-radius: 9999px; font-family: 'Oswald', sans-serif;
+      text-transform: uppercase; letter-spacing: .08em; transform: rotate(-8deg); opacity: .92;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.25); }
+
+    /* Chalkboard hand-note */
+    .chalk { font-family: 'Caveat', cursive; }
+
+    /* Tape strip (washi tape over corners) */
+    .tape { position: absolute; width: 78px; height: 26px; background: rgba(194,152,47,.55);
+      box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+
+    /* Neon-ish flicker sign text */
+    .neon { text-shadow: 0 0 6px rgba(197,54,43,.55), 0 0 14px rgba(197,54,43,.35); }
+
+    /* Section kicker rule */
+    .rule-tag { display: inline-flex; align-items: center; gap: .6rem; }
+    .rule-tag::before, .rule-tag::after { content: ''; height: 2px; width: 28px; background: currentColor; opacity: .5; }
 
     /* ---- Scroll-reveal ---- */
     .reveal-init { opacity: 0; transform: translateY(26px); }
@@ -107,14 +160,14 @@
     #scroll-progress {
       position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 60;
       transform: scaleX(0); transform-origin: 0 50%;
-      background: linear-gradient(90deg,#E2761B,#E0A526,#D7443E);
-      box-shadow: 0 1px 6px rgba(226,118,27,.5);
+      background: linear-gradient(90deg,#C5362B,#C2982F,#1F7A5C);
+      box-shadow: 0 1px 0 rgba(38,32,28,.4);
       transition: transform .1s linear; pointer-events: none;
     }
 
     /* ---- Navbar shrink on scroll ---- */
     #nav-header { transition: background-color .3s ease, box-shadow .3s ease, height .3s ease; }
-    #nav-header.nav-scrolled { background-color: rgba(255,255,255,.95); box-shadow: 0 10px 30px -18px rgba(22,40,77,.45); }
+    #nav-header.nav-scrolled { background-color: rgba(252,246,232,.96); box-shadow: 0 6px 0 -3px rgba(38,32,28,.25); }
     #nav-header.nav-scrolled .nav-bar-inner { height: 4rem; }
 
     /* ---- Shine sweep on primary CTAs ---- */
@@ -133,7 +186,7 @@
     #app-loader {
       position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 1.25rem;
-      background: radial-gradient(circle at 50% 38%, #1B335F, #0B1730 70%);
+      background: radial-gradient(circle at 50% 36%, #3A2A1E, #1A120D 72%);
       transition: opacity .55s ease, visibility .55s ease;
     }
     #app-loader.loader-hide { opacity: 0; visibility: hidden; }
@@ -149,12 +202,12 @@
     .loader-steam span:nth-child(3) { animation-delay: .7s; }
     @keyframes loaderSteam { 0% { opacity: 0; transform: translateY(6px) scaleY(.6); } 40% { opacity: .9; } 100% { opacity: 0; transform: translateY(-16px) scaleY(1.25); } }
     .loader-track { width: 150px; height: 3px; border-radius: 9999px; background: rgba(255,255,255,.15); overflow: hidden; }
-    .loader-track i { display: block; height: 100%; width: 40%; border-radius: 9999px; background: linear-gradient(90deg,#E2761B,#E0A526); animation: loaderBar 1.2s ease-in-out infinite; }
+    .loader-track i { display: block; height: 100%; width: 40%; border-radius: 9999px; background: linear-gradient(90deg,#C5362B,#C2982F); animation: loaderBar 1.2s ease-in-out infinite; }
     @keyframes loaderBar { 0% { transform: translateX(-120%);} 100% { transform: translateX(320%);} }
 
     /* ---- Accessibility ---- */
     button:focus-visible, a:focus-visible, [tabindex]:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-      outline: 3px solid rgba(226,118,27,.55); outline-offset: 2px; border-radius: .5rem;
+      outline: 3px solid rgba(197,54,43,.6); outline-offset: 2px; border-radius: 0;
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
@@ -173,7 +226,7 @@
       <img src="./assets/logo-mark.jpeg" alt="Hot Meal Bar" />
     </div>
     <div class="text-center">
-      <p class="font-display text-white text-xl font-bold tracking-tight">Hot Meal Bar <span class="font-hand text-accent-light text-2xl align-middle">好米巴</span></p>
+      <p class="font-display text-white text-2xl font-bold uppercase tracking-tight">Hot Meal Bar <span class="font-brush text-accent-light text-2xl align-middle normal-case">好米巴</span></p>
       <p class="text-white/45 text-[10px] uppercase tracking-[0.25em] mt-1">Warming up the wok…</p>
     </div>
     <div class="loader-track"><i></i></div>
@@ -182,24 +235,24 @@
   <!-- ============================================ -->
   <!-- CUSTOMER HEADER (Desktop Navigation)         -->
   <!-- ============================================ -->
-  <header id="nav-header" class="fixed top-0 left-0 right-0 z-40 bg-white/85 backdrop-blur-md border-b border-secondary/5 transition-all">
+  <header id="nav-header" class="fixed top-0 left-0 right-0 z-40 bg-cream-light/90 backdrop-blur-md border-b-2 border-ink transition-all">
     <div class="nav-bar-inner max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between transition-all duration-300">
       <!-- Logo / Branding -->
       <div class="flex items-center gap-3 cursor-pointer group" onclick="window.app.switchView('home')">
-        <img src="./assets/logo-mark.jpeg" alt="Hot Meal Bar logo" class="w-11 h-11 rounded-2xl object-cover ring-2 ring-accent/20 shadow-sm group-hover:ring-accent/50 transition-all" />
+        <img src="./assets/logo-mark.jpeg" alt="Hot Meal Bar logo" class="w-11 h-11 rounded-none border-2 border-ink object-cover -rotate-3 group-hover:rotate-0 transition-transform" />
         <div class="leading-none">
-          <span class="font-display font-bold text-xl text-primary tracking-tight block">Hot Meal Bar <span class="font-hand text-accent text-2xl align-middle">好米巴</span></span>
-          <span class="text-[10px] uppercase tracking-[0.18em] text-secondary-light font-semibold">Halal Chinese · Est. 1989</span>
+          <span class="font-display font-bold text-2xl text-ink uppercase tracking-tight block">Hot Meal Bar <span class="font-brush text-accent text-2xl align-middle ml-0.5">好米巴</span></span>
+          <span class="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Halal Chinese · Est. 1989</span>
         </div>
       </div>
 
       <!-- Navigation routes -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <button data-route="home" onclick="window.app.switchView('home')" class="text-secondary-light hover:text-primary transition-colors cursor-pointer">Home</button>
-        <button data-route="catalog" onclick="window.app.switchView('catalog')" class="text-secondary-light hover:text-primary transition-colors cursor-pointer">Our Menu</button>
-        <button data-route="track-order" onclick="window.app.switchView('track-order')" class="text-secondary-light hover:text-primary transition-colors cursor-pointer">Track Order</button>
-        <button data-route="apply" onclick="window.app.switchView('apply')" class="text-secondary-light hover:text-primary transition-colors cursor-pointer">Join Us</button>
-        <button onclick="window.app.switchView('admin-dash')" class="text-secondary hover:text-accent font-semibold flex items-center gap-1.5 transition-colors cursor-pointer">
+      <nav class="hidden md:flex items-center gap-7 text-sm font-display uppercase tracking-[0.1em]">
+        <button data-route="home" onclick="window.app.switchView('home')" class="text-secondary-light hover:text-accent transition-colors cursor-pointer">Home</button>
+        <button data-route="catalog" onclick="window.app.switchView('catalog')" class="text-secondary-light hover:text-accent transition-colors cursor-pointer">Our Menu</button>
+        <button data-route="track-order" onclick="window.app.switchView('track-order')" class="text-secondary-light hover:text-accent transition-colors cursor-pointer">Track Order</button>
+        <button data-route="apply" onclick="window.app.switchView('apply')" class="text-secondary-light hover:text-accent transition-colors cursor-pointer">Join Us</button>
+        <button onclick="window.app.switchView('admin-dash')" class="text-ink hover:text-accent font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border-2 border-ink px-3 py-1.5 shadow-hard hover:-translate-y-0.5 active:translate-y-0 active:shadow-none">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.43l-1.003.828c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.43l1.004-.827c.292-.24.437-.613.43-.991a6.936 6.936 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           Admin Panel
         </button>
@@ -208,13 +261,13 @@
       <!-- Cart Button desktop -->
       <button 
         onclick="window.app.openCartDrawer()"
-        class="relative bg-background hover:bg-background-dark border border-secondary/10 p-3.5 rounded-2xl text-primary hover:text-accent transition-all cursor-pointer flex items-center justify-center active:scale-95 shadow-sm"
+        class="relative bg-cream-light hover:bg-accent hover:text-white border-2 border-ink p-3 rounded-none text-ink shadow-hard transition-all cursor-pointer flex items-center justify-center hover:-translate-y-0.5 active:translate-y-0 active:shadow-none"
         aria-label="Shopping Cart"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
         </svg>
-        <span class="cart-count-badge absolute -top-1.5 -right-1.5 bg-accent text-white text-[10px] font-bold w-5.5 h-5.5 rounded-full flex items-center justify-center shadow-md border border-white hidden">0</span>
+        <span class="cart-count-badge absolute -top-2 -right-2 bg-accent text-white text-[10px] font-bold w-5.5 h-5.5 rounded-full flex items-center justify-center border-2 border-ink hidden">0</span>
       </button>
     </div>
   </header>
@@ -338,7 +391,7 @@
   <!-- ============================================ -->
   <!-- MOBILE BOTTOM STICKY BAR                     -->
   <!-- ============================================ -->
-  <nav id="nav-mobile" class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-secondary/5 h-16 flex md:hidden items-center justify-around text-[10px] font-semibold text-secondary-light">
+  <nav id="nav-mobile" class="fixed bottom-0 left-0 right-0 z-40 bg-cream-light/95 backdrop-blur-md border-t-2 border-ink h-16 flex md:hidden items-center justify-around text-[10px] font-display uppercase tracking-wide text-secondary">
     <button onclick="window.app.switchView('home')" class="flex flex-col items-center gap-1 cursor-pointer hover:text-accent">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
       Home
