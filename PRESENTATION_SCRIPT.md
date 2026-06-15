@@ -21,22 +21,22 @@
 
 ## 2. The big idea — why it looks the way it does (30 seconds)
 
-> "My goal was to make it look like a **real, warm, family restaurant** — not a generic template. So I used the restaurant's actual logo and real photos of their food: the hand‑folded dumplings, the charcoal chicken skewers, the Beijing noodles.
+> "My goal was to make it look like a **real neighbourhood Cha Chaan Teng** — not a generic template. So I used the restaurant's actual logo and real photos of their food: the hand‑folded dumplings, the charcoal chicken skewers, the Beijing noodles.
 >
-> The colours — deep navy, warm orange, teal and gold — come straight from their logo. I used a classic serif font for headings and a handwritten font for little personal touches, so it feels hand‑crafted and authentic."
+> The design is inspired by old Hong Kong **printed menus and ink stamps** — colours are **ink black, chili red, jade green and brass on cream paper**. I used a bold condensed font for headlines and a **Chinese brush font** for the restaurant name, so it feels like a genuine family-run kitchen, not a stock website. Every card is a hard-edged **menu ticket** with dotted price leaders and stamped accents."
 
 ---
 
 ## 3. Walk through the HOME page (60–90 seconds)
 *(Stay on the home page. Slowly scroll down as you talk.)*
 
-> "At the top we have the **hero section**. On the left is the headline — *‘Hand‑folded, fire‑grilled, served piping hot.’* — with the Chinese name underneath. On the right, the food photos gently float to make it feel alive.
+> "At the top we have the **hero section** — designed like a **menu cover**. There's a big condensed headline, a flickering **neon OPEN** sign, and a red **chop seal** with the restaurant's Chinese name 好米巴 stamped on it.
 >
-> Just below, I show three promises: the food is **folded fresh daily**, the kitchen is **100% Halal**, and delivery is **hot in 35 minutes**."
+> Just below, three promises on paper cards: the food is **folded fresh daily**, the kitchen is **100% Halal**, and delivery is **hot in 35 minutes**."
 
 *(Keep scrolling.)*
 
-> "Here you can pick what you're craving by category — dumplings, noodles, skewers and so on. Then these are the **bestsellers**, the dishes the regulars love most.
+> "Here you can pick what you're craving by category — dumplings, noodles, skewers and so on. Then these are the **bestsellers**, shown as **printed menu tickets** with dotted price lines and brush-style Chinese names.
 >
 > Further down is the restaurant's **story since 1989**, and **real reviews** from happy customers. Everything you see — the prices, ratings and reviews — comes from real data files in the project."
 
@@ -76,18 +76,20 @@
 
 ---
 
-## 6. The ADMIN dashboard (45 seconds)
+## 6. The ADMIN dashboard — Kitchen Control Room (45 seconds)
 *(Click **“Admin Panel”** at the top right.)*
 
-> "Now from the **owner's side**. This dashboard shows the key numbers: total sales, total orders, active orders and the average rating. This graph — which I drew by hand using code, no external chart library — shows revenue over the last 7 days. And on the right, the top‑selling dishes."
+> "Now from the **owner's side** — I call this the **Kitchen Control Room**. It's a dark, dense dashboard so the kitchen staff can read it at a glance. You get animated KPI counters for sales, orders and ratings.
+>
+> The analytics show a **revenue chart**, a **conic-gradient category donut**, a **peak-hours heatmap**, and a **live order ticker** that scrolls the latest orders in real time."
 
-*(Click **“Orders Ledger”** in the left sidebar.)*
+*(Click **“KDS Board”** in the left sidebar.)*
 
-> "Here the owner sees every order, can search and filter them, and update an order's status — for example mark it as *Cooking* or *Delivered*."
+> "This is the **KDS Kanban** — orders flow across columns: **New, Prepping, On the Wok, Out for Delivery**. Each ticket has a **live ticking timer** that turns from green to red by urgency, and you can **Bump** a ticket to advance it instantly."
 
-*(Click **“Customer Profiles”**.)*
+*(Press **Ctrl / ⌘ + K**.)*
 
-> "And here's the customer directory with how much each customer has spent."
+> "And there's a **Command Palette** — hit Ctrl-K anywhere to jump between views, search orders, or open analytics without touching the mouse."
 
 *(Click **“Exit Admin Panel”** to go back.)*
 
@@ -107,8 +109,8 @@
 >
 > - It opens with a **branded loading screen** with rising steam — a little wow moment.
 > - I designed a **traditional red Chinese 'chop' seal** with the restaurant's name 好米巴 — you'll see it on the hero and in the footer. That's a unique, cultural touch.
-> - As you scroll, sections **gently fade in**, the numbers **count up**, and there's a **progress bar** at the top.
-> - I used a **serif heading font and a handwritten font** with the restaurant's real colours and photos.
+> - The whole customer side is a **retro editorial Cha Chaan Teng theme** — ink-black and cream paper cards, hard-edged menu tickets with dotted price leaders, and a brush-font Chinese name.
+> - The **admin side flips into a dark Kitchen Control Room** — completely distinct from the bright storefront, with a KDS kanban board, live ticking timers, a peak-hours heatmap, and a command palette.
 > - It's **accessible** — it respects 'reduced motion' settings and has clear keyboard focus outlines.
 > - And I **tested it with an automated script** that checks every button, link, image and data file — it even caught and fixed a real bug."
 
@@ -116,7 +118,7 @@
 
 ## 8. Closing (15 seconds)
 
-> "So that's **Hot Meal Bar** — a beautiful, fully working food‑ordering website with live tracking and an admin dashboard, built around a real Halal Chinese restaurant's identity. Thank you! I'm happy to take any questions."
+> "So that's **Hot Meal Bar** — a beautiful, fully working food‑ordering website with a retro editorial storefront, live delivery tracking, and a **Kitchen Control Room** admin with KDS kanban and analytics. Built around a real Halal Chinese restaurant's identity. Thank you! I'm happy to take any questions."
 
 ---
 
@@ -132,7 +134,7 @@
   > "When you place an order, the code runs a timer that advances the status every few seconds and animates the map, to simulate a real delivery."
 
 - **"Why does it look different from typical templates?"**
-  > "I deliberately used the restaurant's real logo colours, real food photos, a serif heading font and a handwritten accent font, plus a warm textured background — to make it feel like a genuine brand, not a stock template."
+  > "I deliberately built a retro editorial Cha Chaan Teng look — ink black and chili red on cream paper, hard-edged menu tickets with dotted price leaders, a condensed grotesque headline font and a Chinese brush accent font — so it feels like a genuine family restaurant, not a stock template. The admin side is a completely separate dark Kitchen Control Room theme."
 
 - **"What did you use to build it?"**
   > "HTML, CSS (Tailwind), and JavaScript — no framework — and it's hosted free on GitHub Pages."
@@ -140,4 +142,4 @@
 ---
 
 ### ⏱️ Quick 60‑second version (if you're short on time)
-> "This is **Hot Meal Bar**, an online ordering website for a Halal Chinese restaurant. Customers browse the menu, add food to a cart, check out, and **track their delivery live on a map**. The owner gets an **admin dashboard** with sales charts and order management. I built it with HTML, Tailwind CSS and JavaScript, used the restaurant's real logo, colours and food photos so it feels authentic, and hosted it for free on GitHub Pages. Thank you!"
+> "This is **Hot Meal Bar**, an online ordering website for a Halal Chinese restaurant. Customers browse a **retro editorial menu** with printed ticket cards, add food to a cart, check out, and **track their delivery live on a map**. The owner gets a **Kitchen Control Room** admin with a **KDS kanban board**, live analytics, and a **command palette**. I built it with HTML, Tailwind CSS and JavaScript, used the restaurant's real logo, colours and food photos so it feels authentic, and hosted it for free on GitHub Pages. Thank you!"
