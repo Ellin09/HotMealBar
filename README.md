@@ -4,7 +4,7 @@ A modern, frontend-only food‑ordering experience for **Hot Meal Bar (好米巴
 
 Built for the **VibeUI Challenge 2026**.
 
-> Live site: enable GitHub Pages on this repo (Settings → Pages → Branch: `main`, Folder: `/root`). The site will be served at `https://<your-username>.github.io/HotMealBar/`.
+> 🌐 **Live site:** https://ellin09.github.io/HotMealBar/
 
 ---
 
