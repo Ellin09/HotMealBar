@@ -132,11 +132,11 @@ export function renderMockMap(status) {
         <path d="M 250 10 L 250 50" fill="none" stroke="#DFDCD7" stroke-width="8" stroke-linecap="round"/>
 
         <!-- Route trace line -->
-        <path d="M 50 150 L 120 150 L 120 90 L 250 90 L 250 50 L 350 50" fill="none" stroke="#C97C5D" stroke-width="3" stroke-dasharray="8 4" stroke-linecap="round" class="opacity-60"/>
+        <path d="M 50 150 L 120 150 L 120 90 L 250 90 L 250 50 L 350 50" fill="none" stroke="#E2761B" stroke-width="3" stroke-dasharray="8 4" stroke-linecap="round" class="opacity-60"/>
 
         <!-- Restaurant Node (Start) -->
-        <circle cx="50" cy="150" r="10" fill="#1B263B" stroke="#FFFFFF" stroke-width="2.5"/>
-        <text x="50" y="172" fill="#1B263B" font-family="Outfit, sans-serif" font-size="8" font-weight="bold" text-anchor="middle">Gourmet Kitchen</text>
+        <circle cx="50" cy="150" r="10" fill="#16284D" stroke="#FFFFFF" stroke-width="2.5"/>
+        <text x="50" y="172" fill="#16284D" font-family="Fraunces, serif" font-size="8" font-weight="bold" text-anchor="middle">Hot Meal Bar</text>
         
         <!-- Customer Node (Destination) -->
         <circle cx="350" cy="50" r="10" fill="#2A9D8F" stroke="#FFFFFF" stroke-width="2.5"/>
@@ -146,11 +146,11 @@ export function renderMockMap(status) {
         ${status !== 'delivered' ? `
           <g transform="translate(${driverX}, ${driverY})" class="transition-all duration-1000 ease-in-out">
             <!-- Ripple Pulse -->
-            <circle cx="0" cy="0" r="14" fill="#C97C5D" class="opacity-20">
+            <circle cx="0" cy="0" r="14" fill="#E2761B" class="opacity-20">
               <animate attributeName="r" values="8;18;8" dur="2s" repeatCount="indefinite" />
             </circle>
             <!-- Pin -->
-            <circle cx="0" cy="0" r="7" fill="#C97C5D" stroke="#FFFFFF" stroke-width="1.5"/>
+            <circle cx="0" cy="0" r="7" fill="#E2761B" stroke="#FFFFFF" stroke-width="1.5"/>
             <!-- Tiny Bike/Driver Indicator -->
             <circle cx="0" cy="0" r="2.5" fill="#FFFFFF"/>
           </g>
@@ -166,7 +166,7 @@ export function renderMockMap(status) {
         </div>
         <div>
           <h5 class="text-[10px] text-secondary-light font-medium uppercase tracking-wider">Courier</h5>
-          <p class="text-xs font-bold text-primary">${status === 'delivered' ? 'Arrived' : 'Marcus Vance (En route)'}</p>
+          <p class="text-xs font-bold text-primary">${status === 'delivered' ? 'Arrived' : 'Hafiz Rahman (En route)'}</p>
         </div>
       </div>
     </div>

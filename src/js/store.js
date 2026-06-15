@@ -43,7 +43,7 @@ class AppStore {
   async init() {
     try {
       const fetchJSON = async (filename) => {
-        const res = await fetch(`/data/${filename}`);
+        const res = await fetch(`./data/${filename}`);
         if (!res.ok) throw new Error(`Failed to load ${filename}`);
         return await res.json();
       };
@@ -147,8 +147,8 @@ class AppStore {
       orderId,
       status: 'received',
       estimatedTime: new Date(Date.now() + 35 * 60 * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
-      driverName: 'Marcus Vance',
-      driverPhone: '+1 (555) 019-3382',
+      driverName: 'Hafiz Rahman',
+      driverPhone: '+60 12-345 6789',
       details: addressDetails
     };
 

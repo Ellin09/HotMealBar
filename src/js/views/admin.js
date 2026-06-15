@@ -36,7 +36,7 @@ export const adminViews = {
             </div>
             <div>
               <span class="text-xs text-secondary-light block uppercase font-bold tracking-wider">Total Sales</span>
-              <span class="text-2xl font-extrabold text-primary font-display">$${metrics.kpis.totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span class="text-2xl font-extrabold text-primary font-display">RM ${metrics.kpis.totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
           </div>
 
@@ -106,7 +106,7 @@ export const adminViews = {
                   </div>
                   <div class="text-right">
                     <span class="text-xs font-bold text-primary block">${meal.quantity} orders</span>
-                    <span class="text-[10px] text-secondary-light">$${(meal.price * meal.quantity).toFixed(2)}</span>
+                    <span class="text-[10px] text-secondary-light">RM ${(meal.price * meal.quantity).toFixed(2)}</span>
                   </div>
                 </div>
               `).join('')}

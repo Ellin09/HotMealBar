@@ -119,7 +119,7 @@ export function renderOrderTable(items) {
           <div class="text-xs text-secondary-light">Qty: ${order.quantity}</div>
         </td>
         <td class="px-6 py-4 whitespace-nowrap text-sm text-charcoal font-semibold">
-          $${order.amount.toFixed(2)}
+          RM ${order.amount.toFixed(2)}
         </td>
         <td class="px-6 py-4 whitespace-nowrap text-xs text-secondary-light">
           ${orderTime}
@@ -196,7 +196,7 @@ export function renderCustomerTable(items) {
           ${c.orderCount}
         </td>
         <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-primary text-right font-display">
-          $${c.totalSpend.toFixed(2)}
+          RM ${c.totalSpend.toFixed(2)}
         </td>
       </tr>
     `;

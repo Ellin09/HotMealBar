@@ -3,12 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hot Meal Food Ordering System - A premium, frontend-only food ordering catalog with real-time simulated order tracking.">
-  <title>Gourmet Kitchen | Exquisite Hot Meals</title>
-  <!-- Standard Favicon link -->
-  <link rel="icon" type="image/svg+xml" href="/assets/brand/logo.svg" onerror="this.href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍳</text></svg>'">
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="/src/css/index.css">
+  <meta name="description" content="Hot Meal Bar (好米巴) — Halal Chinese kitchen serving hand-folded dumplings, hand-pulled Mee Tarik, grilled skewers & Beijing noodles since 1989. Order hot, fresh & delivered fast.">
+  <title>Hot Meal Bar 好米巴 · Halal Chinese Kitchen Since 1989</title>
+  <link rel="icon" type="image/jpeg" href="./assets/logo-mark.jpeg">
+
+  <!-- Fonts: characterful serif display + clean body + handwritten accents -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Play CDN (compiles in-browser — no build step required) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary:   { DEFAULT: '#16284D', light: '#294A82', dark: '#0B1730' },
+            secondary: { DEFAULT: '#4A5A72', light: '#7A8AA3', dark: '#313E52' },
+            accent:    { DEFAULT: '#E2761B', light: '#F59B3D', dark: '#BF5E0E' },
+            teal:      { DEFAULT: '#1E9C92', light: '#35BDB2', dark: '#14736B' },
+            gold:      { DEFAULT: '#E0A526', light: '#F0C45A', dark: '#B9831A' },
+            spice:     { DEFAULT: '#D7443E', light: '#E86A64', dark: '#AE2F2A' },
+            background:{ DEFAULT: '#FBF6EE', card: '#FFFFFF', dark: '#F0E7D7' },
+            charcoal:  { DEFAULT: '#2A2622', light: '#5C544B', dark: '#15120F' },
+            success:   { DEFAULT: '#2A9D8F', light: '#48B3A6', dark: '#1E756B' }
+          },
+          fontFamily: {
+            sans:    ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['Fraunces', 'serif'],
+            hand:    ['Caveat', 'cursive']
+          },
+          boxShadow: {
+            premium: '0 18px 40px -22px rgba(22, 40, 77, 0.22)',
+            'premium-hover': '0 30px 60px -24px rgba(22, 40, 77, 0.30)',
+            'accent-glow': '0 12px 28px -8px rgba(226, 118, 27, 0.45)'
+          },
+          keyframes: {
+            slideUp: { '0%': { opacity: '0', transform: 'translateY(22px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            fadeIn:  { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            floaty:  { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-14px)' } },
+            steam:   { '0%': { opacity: '0', transform: 'translateY(0) scaleX(1)' }, '40%': { opacity: '.5' }, '100%': { opacity: '0', transform: 'translateY(-26px) scaleX(1.6)' } },
+            marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } }
+          },
+          animation: {
+            'slide-up': 'slideUp .5s cubic-bezier(.16,1,.3,1) forwards',
+            'fade-in': 'fadeIn .4s ease-out forwards',
+            'floaty': 'floaty 6s ease-in-out infinite',
+            'steam': 'steam 3s ease-out infinite',
+            'marquee': 'marquee 28s linear infinite'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    @layer base {
+      body { @apply bg-background text-charcoal font-sans antialiased selection:bg-accent selection:text-white; }
+      h1,h2,h3,h4,h5,h6 { @apply font-display text-primary; }
+    }
+    @layer components {
+      .glass-card { @apply bg-white/80 backdrop-blur-md border border-white/60 shadow-premium; }
+      .interactive-scale { @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-premium-hover; }
+      .form-input-premium { @apply w-full px-4 py-3 bg-white border border-secondary/20 rounded-xl focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all text-charcoal; }
+    }
+  </style>
+
+  <style>
+    /* Warm paper-grain backdrop — gives a hand-crafted, non-template feel */
+    body {
+      background-color: #FBF6EE;
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(30,156,146,0.07), transparent 42%),
+        radial-gradient(circle at 88% 8%, rgba(226,118,27,0.08), transparent 40%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(74,90,114,.25); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(74,90,114,.45); }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .shimmer-loading { background: linear-gradient(90deg,#f3efe7 25%,#ece6da 50%,#f3efe7 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite linear; }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    .map-pulse::after { content:''; position:absolute; inset:0; border-radius:50%; background: rgba(226,118,27,.3); animation: pulse-ring 1.5s cubic-bezier(.215,.61,.355,1) infinite; }
+    @keyframes pulse-ring { 0% { transform: scale(.33);} 80%,100% { opacity:0; } }
+    /* Hand-drawn noodle divider */
+    .noodle-divider { height: 18px; width: 100%; background-repeat: repeat-x; background-size: 64px 18px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='18'%3E%3Cpath d='M0 9 C 16 -2, 16 20, 32 9 S 48 -2, 64 9' fill='none' stroke='%23E2761B' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E"); }
+    .text-balance { text-wrap: balance; }
+  </style>
 </head>
 <body class="bg-background min-h-screen flex flex-col justify-between">
 
@@ -18,19 +103,18 @@
   <header id="nav-header" class="fixed top-0 left-0 right-0 z-40 bg-white/85 backdrop-blur-md border-b border-secondary/5 transition-all">
     <div class="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
       <!-- Logo / Branding -->
-      <div class="flex items-center gap-2.5 cursor-pointer" onclick="window.app.switchView('home')">
-        <div class="w-10 h-10 bg-accent rounded-2xl flex items-center justify-center text-white shadow-accent-glow">
-          <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a3 3 0 00-3-3H9.75a3 3 0 00-3 3h15.375M12 13.5h3.75M9 15h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-.621-.504-1.125-1.125-1.125H9.75M9.663 5.378A4 4 0 100 11.25c0 .621.504 1.125 1.125 1.125H9.75M12 3v18M3 12h18"/>
-          </svg>
+      <div class="flex items-center gap-3 cursor-pointer group" onclick="window.app.switchView('home')">
+        <img src="./assets/logo-mark.jpeg" alt="Hot Meal Bar logo" class="w-11 h-11 rounded-2xl object-cover ring-2 ring-accent/20 shadow-sm group-hover:ring-accent/50 transition-all" />
+        <div class="leading-none">
+          <span class="font-display font-bold text-xl text-primary tracking-tight block">Hot Meal Bar <span class="font-hand text-accent text-2xl align-middle">好米巴</span></span>
+          <span class="text-[10px] uppercase tracking-[0.18em] text-secondary-light font-semibold">Halal Chinese · Est. 1989</span>
         </div>
-        <span class="font-display font-bold text-xl text-primary tracking-tight">Gourmet<span class="text-accent">Kitchen</span></span>
       </div>
 
       <!-- Navigation routes -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
         <button data-route="home" onclick="window.app.switchView('home')" class="text-secondary-light hover:text-primary transition-colors cursor-pointer">Home</button>
-        <button data-route="catalog" onclick="window.app.switchView('catalog')" class="text-secondary-light hover:text-primary transition-colors cursor-pointer">Menu Catalog</button>
+        <button data-route="catalog" onclick="window.app.switchView('catalog')" class="text-secondary-light hover:text-primary transition-colors cursor-pointer">Our Menu</button>
         <button data-route="track-order" onclick="window.app.switchView('track-order')" class="text-secondary-light hover:text-primary transition-colors cursor-pointer">Track Order</button>
         <button data-route="apply" onclick="window.app.switchView('apply')" class="text-secondary-light hover:text-primary transition-colors cursor-pointer">Join Us</button>
         <button onclick="window.app.switchView('admin-dash')" class="text-secondary hover:text-accent font-semibold flex items-center gap-1.5 transition-colors cursor-pointer">
@@ -112,7 +196,7 @@
   <!-- ============================================ -->
   <footer class="bg-primary-dark text-white/50 py-6 border-t border-white/5">
     <div class="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-      <p>© 2026 Gourmet Kitchen. All rights reserved. Created for VibeUI Competition.</p>
+      <p>© 2026 Hot Meal Bar 好米巴 · Halal Chinese Kitchen since 1989. Built for the VibeUI Challenge 2026.</p>
       <div class="flex gap-6">
         <span class="hover:text-white cursor-pointer">Privacy Policy</span>
         <span class="hover:text-white cursor-pointer">Terms of Service</span>
@@ -187,6 +271,6 @@
   </div>
 
   <!-- App Main Bundle -->
-  <script type="module" src="/src/js/app.js"></script>
+  <script type="module" src="./src/js/app.js"></script>
 </body>
 </html>

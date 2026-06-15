@@ -20,108 +20,229 @@ let trackOrderResult = null;
 export const customerViews = {
   // Render Customer Home View
   renderHome(container) {
-    // Select popular meals (top 4 rated)
-    const featuredMeals = [...store.state.meals]
-      .sort((a, b) => b.rating - a.rating)
-      .slice(0, 4);
+    // Bestsellers first, topped up with highest-rated dishes to fill the grid
+    const bestsellers = store.state.meals.filter(m => m.bestseller);
+    const topRated = [...store.state.meals].sort((a, b) => b.rating - a.rating);
+    const featuredMeals = [...new Set([...bestsellers, ...topRated])].slice(0, 8);
 
-    // Categories list
-    const categories = ['All', 'Starters', 'Mains', 'Seafood', 'Vegetarian', 'Desserts', 'Beverages'];
+    const categories = ['All', 'Dumplings', 'Noodles', 'Skewers', 'Rice & Wok', 'Soups', 'Sides', 'Beverages'];
 
-    // Select recent orders for quick reorder
+    // Recent orders for the fast-reorder panel
     const recentOrders = store.state.orders.slice(0, 3).map(o => {
       const meal = store.state.meals.find(m => m.mealId === o.mealId);
       return { ...o, meal };
     });
 
+    // A few real reviews to build trust
+    const reviews = [...store.state.ratings].filter(r => r.review && r.rating >= 4).slice(0, 3).map(r => {
+      const c = store.state.customers.find(x => x.customerId === r.customerId);
+      const m = store.state.meals.find(x => x.mealId === r.mealId);
+      return { ...r, name: c ? c.name : 'Happy diner', meal: m ? m.mealName : '' };
+    });
+
+    const marqueeTags = ['Hand-folded Dumplings', '好米巴', 'Mee Tarik 拉面', 'Charcoal Skewers', 'Beijing Zhajiang Noodles', '100% Halal', 'Beef DingDing 丁丁', 'Since 1989', 'Hot in 35 min'];
+    const marquee = marqueeTags.concat(marqueeTags).map(t => `<span class="px-6 text-lg font-display italic text-white/80">${t}</span><span class="text-accent">&#10022;</span>`).join('');
+
     container.innerHTML = `
-      <!-- Hero Banner -->
-      <section class="relative bg-primary rounded-[2rem] overflow-hidden mb-12 p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 shadow-premium text-white">
-        <div class="absolute inset-0 bg-gradient-to-r from-primary-dark/80 to-transparent z-0"></div>
-        
-        <div class="max-w-xl relative z-10 space-y-5">
-          <span class="text-accent bg-accent/15 border border-accent/20 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Gourmet Delivery</span>
-          <h1 class="font-display text-4xl md:text-5xl lg:text-6xl text-white font-extrabold leading-tight">
-            Exquisite Hot Meals, Delivered to <span class="text-accent">Your Door</span>
+      <!-- ===================== HERO ===================== -->
+      <section class="relative grid lg:grid-cols-2 gap-10 lg:gap-6 items-center mb-6 pt-2">
+        <!-- decorative blobs -->
+        <div class="pointer-events-none absolute -top-10 -left-16 w-72 h-72 bg-teal/10 rounded-full blur-3xl"></div>
+        <div class="pointer-events-none absolute top-20 right-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 space-y-6">
+          <span class="inline-flex items-center gap-2 bg-white border border-accent/20 text-accent px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-[0.15em] shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-spice animate-pulse"></span> Halal Chinese Kitchen · Since 1989
+          </span>
+          <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-primary font-black leading-[0.95] text-balance">
+            Hand-folded,<br/>fire-grilled,<br/><span class="text-accent">served piping hot.</span>
           </h1>
-          <p class="text-secondary-light text-sm md:text-base leading-relaxed">
-            Experience premium restaurant culinary creations, curated fresh daily and delivered hot under 35 minutes.
+          <p class="font-hand text-2xl text-teal -mt-1">好米巴 — your neighbourhood hot meal bar</p>
+          <p class="text-secondary text-base leading-relaxed max-w-md">
+            Dumplings folded by hand each morning, noodles pulled to order, skewers kissed by charcoal. Real Halal Chinese comfort food, delivered to your door in under 35 minutes.
           </p>
-          <div class="flex flex-wrap gap-4 pt-2">
-            <button onclick="window.app.switchView('catalog')" class="bg-accent hover:bg-accent-dark text-white font-semibold px-7 py-3.5 rounded-2xl shadow-accent-glow hover:shadow-none transition-all cursor-pointer active:scale-95 text-sm">
-              Explore Catalog
+          <div class="flex flex-wrap gap-3 pt-1">
+            <button onclick="window.app.switchView('catalog')" class="bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-2xl shadow-accent-glow hover:shadow-none transition-all cursor-pointer active:scale-95">
+              Order Now
             </button>
-            <button onclick="window.app.switchView('catalog'); window.app.setCatalogCategory('Seafood');" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-7 py-3.5 rounded-2xl transition-all cursor-pointer active:scale-95 text-sm">
-              View Seafood
+            <button onclick="document.getElementById('home-bestsellers').scrollIntoView({behavior:'smooth'})" class="bg-white hover:bg-background-dark text-primary border border-secondary/15 font-semibold px-8 py-4 rounded-2xl transition-all cursor-pointer active:scale-95">
+              See Bestsellers
             </button>
           </div>
+          <!-- trust row -->
+          <div class="flex flex-wrap items-center gap-x-7 gap-y-3 pt-4">
+            <div class="flex items-center gap-2">
+              <div class="w-9 h-9 rounded-xl bg-success/10 text-success flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+              <div><p class="text-sm font-bold text-primary leading-none">100% Halal</p><p class="text-[11px] text-secondary-light">Certified kitchen</p></div>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-9 h-9 rounded-xl bg-gold/15 text-gold-dark flex items-center justify-center"><svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
+              <div><p class="text-sm font-bold text-primary leading-none">4.9 / 5.0</p><p class="text-[11px] text-secondary-light">12,000+ orders</p></div>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+              <div><p class="text-sm font-bold text-primary leading-none">35 minutes</p><p class="text-[11px] text-secondary-light">Hot delivery</p></div>
+            </div>
+          </div>
         </div>
-        
-        <!-- Hero Image Mock -->
-        <div class="relative z-10 w-full max-w-xs lg:max-w-md aspect-square rounded-full border-[8px] border-white/5 overflow-hidden shadow-2xl">
-          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80" alt="Premium Meal Platter" class="w-full h-full object-cover"/>
+
+        <!-- Hero photo collage -->
+        <div class="relative z-10 h-[420px] md:h-[520px]">
+          <div class="absolute top-0 right-2 w-[68%] h-[64%] rounded-[2rem] overflow-hidden shadow-premium-hover rotate-2 animate-floaty border-4 border-white">
+            <img src="./assets/dumplings-bowl.jpeg" alt="Hot Meal Bar dumplings" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='./assets/dumplings-plate.jpeg'"/>
+          </div>
+          <div class="absolute bottom-2 left-0 w-[54%] h-[50%] rounded-[2rem] overflow-hidden shadow-premium-hover -rotate-3 border-4 border-white" style="animation: floaty 7s ease-in-out infinite;">
+            <img src="./assets/chicken-skewers.jpeg" alt="Grilled skewers" class="w-full h-full object-cover"/>
+          </div>
+          <div class="absolute bottom-16 right-4 w-[40%] h-[40%] rounded-[2rem] overflow-hidden shadow-premium-hover rotate-3 border-4 border-white" style="animation: floaty 8s ease-in-out infinite;">
+            <img src="./assets/beijing-noodles.jpeg" alt="Beijing noodles" class="w-full h-full object-cover"/>
+          </div>
+          <!-- floating rating chip -->
+          <div class="absolute top-6 -left-1 md:left-2 bg-white rounded-2xl shadow-premium px-4 py-3 flex items-center gap-3 z-20 animate-slide-up">
+            <img src="./assets/logo-mark.jpeg" class="w-10 h-10 rounded-xl object-cover" alt="logo"/>
+            <div>
+              <div class="flex text-gold">${renderRatingStars(5)}</div>
+              <p class="text-[11px] text-secondary-light mt-0.5">"Best dumplings in town!"</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Category quick selection -->
+      <!-- ===================== MARQUEE ===================== -->
+      <section class="relative -mx-4 md:-mx-8 my-12 bg-primary py-3 overflow-hidden">
+        <div class="flex items-center whitespace-nowrap animate-marquee">${marquee}</div>
+      </section>
+
+      <!-- ===================== WHY US ===================== -->
+      <section class="grid md:grid-cols-3 gap-5 mb-14">
+        ${[
+          { c: 'accent', t: 'Folded fresh daily', d: 'Every dumpling is wrapped by hand each morning — never mass-produced, never frozen on arrival.', i: 'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
+          { c: 'success', t: 'Strictly Halal', d: 'A fully certified Halal kitchen — Muslim-friendly Chinese cuisine the whole family can trust.', i: 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
+          { c: 'teal', t: 'Hot in 35 minutes', d: 'Cooked to order and rushed to your door in insulated packaging so it lands steaming hot.', i: 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z' }
+        ].map(f => `
+          <div class="bg-white rounded-3xl p-7 border border-secondary/10 shadow-premium hover:shadow-premium-hover transition-all">
+            <div class="w-12 h-12 rounded-2xl bg-${f.c}/10 text-${f.c} flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="${f.i}"/></svg>
+            </div>
+            <h3 class="font-display text-xl font-bold text-primary mb-1.5">${f.t}</h3>
+            <p class="text-sm text-secondary leading-relaxed">${f.d}</p>
+          </div>
+        `).join('')}
+      </section>
+
+      <!-- ===================== CATEGORIES ===================== -->
       <section class="mb-12">
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold font-display text-primary">Browse Categories</h2>
+        <div class="flex items-end justify-between mb-5">
+          <div>
+            <p class="font-hand text-2xl text-accent leading-none">explore the menu</p>
+            <h2 class="text-3xl font-bold font-display text-primary">What are you craving?</h2>
+          </div>
           <button onclick="window.app.switchView('catalog')" class="text-sm font-semibold text-accent hover:text-accent-dark flex items-center gap-1 cursor-pointer">
-            View All
+            Full menu
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
           </button>
         </div>
         <div class="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 scroll-smooth no-scrollbar">
-          ${renderCategoryChips(categories, 'All', 'setCatalogCategory')}
+          ${renderCategoryChips(categories, 'All', 'goToCategory')}
         </div>
       </section>
 
-      <!-- Featured Meals grid -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-bold font-display text-primary mb-6">Trending Culinary Creations</h2>
+      <!-- ===================== BESTSELLERS ===================== -->
+      <section id="home-bestsellers" class="mb-16 scroll-mt-28">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="bg-spice text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Bestsellers</span>
+          <h2 class="text-3xl font-bold font-display text-primary">Loved by the regulars</h2>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          ${featuredMeals.map(meal => renderMealCard(meal)).join('')}
+          ${featuredMeals.slice(0, 8).map(meal => renderMealCard(meal)).join('')}
         </div>
       </section>
 
-      <!-- Quick Reorder Panel for returnees -->
-      <section class="glass-card rounded-[2rem] p-8 border border-secondary/5">
-        <h3 class="font-display text-xl font-bold text-primary mb-2">Fast Reorder</h3>
-        <p class="text-xs text-secondary-light mb-6">Reorder one of your recently ordered hot meals in one single tap.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- ===================== HERITAGE STORY ===================== -->
+      <section class="relative bg-primary rounded-[2.5rem] overflow-hidden mb-16 text-white">
+        <div class="absolute inset-0 opacity-20" style="background-image:radial-gradient(circle at 80% 20%, rgba(226,118,27,.5), transparent 45%), radial-gradient(circle at 10% 90%, rgba(30,156,146,.4), transparent 40%);"></div>
+        <div class="relative grid lg:grid-cols-2 gap-8 items-center p-8 md:p-14">
+          <div class="space-y-5">
+            <p class="font-hand text-3xl text-accent-light leading-none">our story</p>
+            <h2 class="font-display text-3xl md:text-4xl font-black leading-tight">A recipe passed down<br/>since 1989.</h2>
+            <p class="text-white/70 leading-relaxed text-sm md:text-base">
+              Hot Meal Bar began as a tiny family stall folding dumplings before sunrise. Three generations later, we still pleat every wrapper by hand and pull our noodles fresh — bringing the warmth of Chinese Muslim home cooking to your table.
+            </p>
+            <div class="grid grid-cols-3 gap-4 pt-3">
+              <div><p class="font-display text-3xl font-black text-accent-light">1989</p><p class="text-[11px] text-white/60 uppercase tracking-wider">Est.</p></div>
+              <div><p class="font-display text-3xl font-black text-accent-light">50+</p><p class="text-[11px] text-white/60 uppercase tracking-wider">Dishes</p></div>
+              <div><p class="font-display text-3xl font-black text-accent-light">100%</p><p class="text-[11px] text-white/60 uppercase tracking-wider">Halal</p></div>
+            </div>
+            <button onclick="window.app.switchView('apply')" class="mt-2 bg-white text-primary font-semibold px-7 py-3.5 rounded-2xl hover:bg-background-dark transition-all cursor-pointer active:scale-95 text-sm">
+              Become a campus reseller →
+            </button>
+          </div>
+          <div class="relative flex justify-center">
+            <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-white/95 p-4 shadow-2xl">
+              <img src="./assets/logo-art.jpeg" alt="Hot Meal Bar 好米巴" class="w-full h-full object-contain rounded-full"/>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      ${reviews.length ? `
+      <!-- ===================== REVIEWS ===================== -->
+      <section class="mb-16">
+        <div class="text-center mb-8">
+          <p class="font-hand text-2xl text-accent">kind words</p>
+          <h2 class="text-3xl font-bold font-display text-primary">From our happy diners</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-5">
+          ${reviews.map(r => `
+            <div class="bg-white rounded-3xl p-6 border border-secondary/10 shadow-premium">
+              <div class="flex text-gold mb-3">${renderRatingStars(r.rating)}</div>
+              <p class="text-charcoal leading-relaxed text-sm mb-4">"${r.review}"</p>
+              <div class="flex items-center gap-3 pt-3 border-t border-secondary/5">
+                <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm font-display">${r.name.charAt(0)}</div>
+                <div><p class="text-sm font-semibold text-primary">${r.name}</p><p class="text-[11px] text-secondary-light">on ${r.meal}</p></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </section>` : ''}
+
+      <!-- ===================== FAST REORDER ===================== -->
+      ${recentOrders.some(o => o.meal) ? `
+      <section class="glass-card rounded-[2rem] p-8 border border-secondary/5 mb-4">
+        <h3 class="font-display text-2xl font-bold text-primary mb-1">Order it again</h3>
+        <p class="text-sm text-secondary-light mb-6">Your recent favourites, one tap away.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           ${recentOrders.map(order => {
             if (!order.meal) return '';
             return `
-              <div class="flex items-center justify-between p-4 bg-background rounded-2xl border border-secondary/5 hover:border-accent/30 hover:bg-white transition-all group">
-                <div class="flex items-center gap-3">
-                  <img src="${order.meal.image}" alt="${order.meal.mealName}" class="w-12 h-12 rounded-xl object-cover border border-secondary/10" />
-                  <div>
+              <div class="flex items-center justify-between p-4 bg-background rounded-2xl border border-secondary/5 hover:border-accent/30 hover:bg-white transition-all">
+                <div class="flex items-center gap-3 min-w-0">
+                  <img src="${order.meal.image}" alt="${order.meal.mealName}" class="w-12 h-12 rounded-xl object-cover border border-secondary/10" onerror="this.onerror=null;this.src='./assets/dumplings-plate.jpeg'" />
+                  <div class="min-w-0">
                     <h4 class="font-display font-semibold text-sm text-primary line-clamp-1">${order.meal.mealName}</h4>
-                    <span class="text-xs text-secondary-light">$${order.meal.price.toFixed(2)}</span>
+                    <span class="text-xs text-secondary-light">RM ${order.meal.price.toFixed(2)}</span>
                   </div>
                 </div>
-                <button 
-                  onclick="window.app.addToCart('${order.meal.mealId}'); window.app.openCartDrawer();"
-                  class="bg-white hover:bg-accent hover:text-white text-accent border border-accent/20 p-2.5 rounded-xl cursor-pointer transition-all active:scale-90"
-                  title="Reorder"
-                >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/>
-                  </svg>
+                <button onclick="window.app.addToCart('${order.meal.mealId}'); window.app.openCartDrawer();" class="bg-white hover:bg-accent hover:text-white text-accent border border-accent/20 p-2.5 rounded-xl cursor-pointer transition-all active:scale-90 flex-shrink-0" title="Reorder">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
                 </button>
               </div>
             `;
           }).join('')}
         </div>
-      </section>
+      </section>` : ''}
     `;
+  },
+
+  // Jump from a home category chip straight into the filtered catalog
+  goToCategory(cat) {
+    this.setCatalogCategory(cat);
+    store.setState({ activeView: 'catalog' });
   },
 
   // Render Meals Catalog View (Search, Sort, Filters, and Paginated list)
   renderCatalog(container) {
-    const categories = ['All', 'Starters', 'Mains', 'Seafood', 'Vegetarian', 'Desserts', 'Beverages'];
+    const categories = ['All', 'Dumplings', 'Noodles', 'Skewers', 'Rice & Wok', 'Soups', 'Sides', 'Beverages'];
     
     // Fetch query results
     const results = dataLoader.queryMeals(catalogFilters);
@@ -187,7 +308,7 @@ export const customerViews = {
         <main class="flex-grow">
           <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold font-display text-primary">Explore Menu</h2>
-            <span class="text-xs text-secondary-light">${results.total} Gourmet dishes available</span>
+            <span class="text-xs text-secondary-light">${results.total} dishes on the menu</span>
           </div>
 
           <!-- Meals Grid -->
@@ -253,7 +374,7 @@ export const customerViews = {
         
         <!-- Left Pane: Image -->
         <div class="w-full md:w-1/2 aspect-video md:aspect-auto relative bg-background-dark">
-          <img src="${meal.image}" alt="${meal.mealName}" class="w-full h-full object-cover"/>
+          <img src="${meal.image}" alt="${meal.mealName}" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='./assets/dumplings-plate.jpeg'"/>
           <button 
             onclick="window.app.closeMealDetails()"
             class="absolute top-4 left-4 md:hidden bg-white/90 backdrop-blur-md p-2 rounded-full text-primary shadow-md cursor-pointer hover:bg-white"
@@ -306,7 +427,7 @@ export const customerViews = {
               </span>
               <span class="flex items-center gap-1">
                 <svg class="w-4 h-4 text-success" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
-                Fresh Gourmet
+                Freshly cooked · Halal
               </span>
             </div>
 
@@ -333,7 +454,7 @@ export const customerViews = {
           <div class="flex items-center justify-between border-t border-secondary/5 pt-4 mt-6">
             <div>
               <span class="text-xs text-secondary-light">Unit Price</span>
-              <span class="text-xl font-extrabold text-primary block font-display">$${meal.price.toFixed(2)}</span>
+              <span class="text-xl font-extrabold text-primary block font-display">RM ${meal.price.toFixed(2)}</span>
             </div>
             <button 
               onclick="window.app.addToCart('${meal.mealId}'); window.app.closeMealDetails();"
@@ -385,7 +506,7 @@ export const customerViews = {
           <img src="${meal.image}" alt="${meal.mealName}" class="w-16 h-16 rounded-xl object-cover border border-secondary/10" />
           <div class="flex-grow min-w-0">
             <h4 class="font-display font-semibold text-sm text-primary truncate">${meal.mealName}</h4>
-            <span class="text-xs text-secondary-light block mb-2">$${meal.price.toFixed(2)}</span>
+            <span class="text-xs text-secondary-light block mb-2">RM ${meal.price.toFixed(2)}</span>
             
             <!-- Adjust Qty -->
             <div class="flex items-center gap-3">
@@ -426,15 +547,15 @@ export const customerViews = {
       <div class="space-y-2.5 mb-6 text-xs">
         <div class="flex items-center justify-between text-secondary-light">
           <span>Subtotal</span>
-          <span>$${subtotal.toFixed(2)}</span>
+          <span>RM ${subtotal.toFixed(2)}</span>
         </div>
         <div class="flex items-center justify-between text-secondary-light">
           <span>Delivery Fee</span>
-          <span>$${deliveryFee.toFixed(2)}</span>
+          <span>RM ${deliveryFee.toFixed(2)}</span>
         </div>
         <div class="flex items-center justify-between text-sm font-bold text-primary pt-2.5 border-t border-secondary/10">
           <span>Total Price</span>
-          <span class="font-display">$${total.toFixed(2)}</span>
+          <span class="font-display">RM ${total.toFixed(2)}</span>
         </div>
       </div>
       <button 
@@ -515,7 +636,7 @@ export const customerViews = {
                   Cancel
                 </button>
                 <button type="submit" class="px-8 py-3 bg-accent hover:bg-accent-dark text-white font-semibold rounded-2xl shadow-accent-glow hover:shadow-none transition-all cursor-pointer text-sm">
-                  Place Order ($${total.toFixed(2)})
+                  Place Order (RM ${total.toFixed(2)})
                 </button>
               </div>
             </form>
@@ -541,7 +662,7 @@ export const customerViews = {
                         <span class="text-secondary-light">Qty: ${item.quantity}</span>
                       </div>
                     </div>
-                    <span class="font-semibold text-primary font-display">$${(meal.price * item.quantity).toFixed(2)}</span>
+                    <span class="font-semibold text-primary font-display">RM ${(meal.price * item.quantity).toFixed(2)}</span>
                   </div>
                 `;
               }).join('')}
@@ -551,15 +672,15 @@ export const customerViews = {
             <div class="space-y-2 border-t border-secondary/5 pt-4 text-xs">
               <div class="flex items-center justify-between text-secondary-light">
                 <span>Subtotal</span>
-                <span>$${subtotal.toFixed(2)}</span>
+                <span>RM ${subtotal.toFixed(2)}</span>
               </div>
               <div class="flex items-center justify-between text-secondary-light">
                 <span>Delivery Fee</span>
-                <span>$${deliveryFee.toFixed(2)}</span>
+                <span>RM ${deliveryFee.toFixed(2)}</span>
               </div>
               <div class="flex items-center justify-between text-sm font-bold text-primary pt-2.5 border-t border-secondary/10">
                 <span>Total Amount</span>
-                <span class="font-display">$${total.toFixed(2)}</span>
+                <span class="font-display">RM ${total.toFixed(2)}</span>
               </div>
             </div>
           </div>
@@ -854,7 +975,7 @@ export const customerViews = {
                 <div class="text-xs text-charcoal space-y-2 leading-relaxed">
                   <p><strong class="text-primary">Meal:</strong> ${meal ? meal.mealName : 'N/A'}</p>
                   <p><strong class="text-primary">Quantity:</strong> ${order.quantity}</p>
-                  <p><strong class="text-primary">Amount:</strong> $${order.amount.toFixed(2)}</p>
+                  <p><strong class="text-primary">Amount:</strong> RM ${order.amount.toFixed(2)}</p>
                   <p><strong class="text-primary">Date:</strong> ${new Date(order.orderDate).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                 </div>
               </div>
@@ -891,7 +1012,7 @@ export const customerViews = {
                     ${o.meal ? `<img src="${o.meal.image}" alt="${o.meal.mealName}" class="w-10 h-10 rounded-xl object-cover border border-secondary/10" />` : ''}
                     <div>
                       <span class="font-display font-semibold text-sm text-primary block">${o.orderId}</span>
-                      <span class="text-xs text-secondary-light">${o.meal ? o.meal.mealName : 'Unknown'} · $${o.amount.toFixed(2)}</span>
+                      <span class="text-xs text-secondary-light">${o.meal ? o.meal.mealName : 'Unknown'} · RM ${o.amount.toFixed(2)}</span>
                     </div>
                   </div>
                   <span class="px-3 py-1 rounded-full text-[10px] font-bold ${statusColors[o.status] || 'bg-gray-100 text-gray-700'}">${statusLabels[o.status] || o.status}</span>
@@ -947,3 +1068,4 @@ window.app.catalogPage = customerViews.catalogPage.bind(customerViews);
 window.app.submitCheckout = customerViews.submitCheckout.bind(customerViews);
 window.app.submitApplication = customerViews.submitApplication.bind(customerViews);
 window.app.trackOrderLookup = customerViews.trackOrderLookup.bind(customerViews);
+window.app.goToCategory = customerViews.goToCategory.bind(customerViews);

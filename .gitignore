@@ -25,5 +25,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Ignore all markdown files (including prd.md)
+# Ignore all markdown files (including prd.md) except project docs
 *.md
+!README.md
+!PRESENTATION_SCRIPT.md

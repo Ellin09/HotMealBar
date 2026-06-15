@@ -1,94 +1,66 @@
-# Gourmet Kitchen | Exquisite Hot Meals
+# Hot Meal Bar 好米巴 — Halal Chinese Kitchen
 
-> [!NOTE]
-> This repository is a high-fidelity frontend mockup created for a competition that will be held on **15 June**.
+A modern, frontend-only food‑ordering experience for **Hot Meal Bar (好米巴)**, a Halal Chinese kitchen serving hand‑folded dumplings, hand‑pulled *Mee Tarik*, charcoal skewers and Beijing noodles since **1989**.
 
-A high-performance, responsive, and frontend-only **Hot Meal Food Ordering System** designed with premium modern aesthetics, rich micro-animations, and a highly interactive user experience.
+Built for the **VibeUI Challenge 2026**.
 
----
-
-## ✨ Key Features
-
-### 🛒 Customer Journey
-- **Interactive Home Page**: Features premium hero banners, dynamic categories, promotional cards, and a quick-reorder utility for return visitors.
-- **Advanced Catalog Search & Filters**: Handles quick search and multiple filtering parameters (price range, ratings, cooking time, ingredients search) with high-speed dynamic sorting.
-- **Detailed Product Modals**: Showcases ingredients lists, customer review streams, and add-to-cart helpers.
-- **Slide-out Cart Panel**: Allows real-time quantity adjustments, cart totals, and item removals.
-- **Checkout & Active Tracking Simulation**: Includes address inputs, mock payment configuration, and a live en-route delivery tracking page that updates step-by-step progress and map coordinates using a background state loop.
-
-### 📊 Admin Panel
-- **Real-Time KPI Dashboard**: Displays total orders, revenue, active deliveries, and client ratings with a custom Canvas-based sales trend line chart.
-- **Interactive Orders Ledger**: Search, filter, and modify order stages (Pending, Prep, Out for Delivery, Delivered, Cancelled) dynamically.
-- **Customer Profiles Directory**: Lists customers, registration dates, order frequencies, and lifetime value metrics.
+> Live site: enable GitHub Pages on this repo (Settings → Pages → Branch: `main`, Folder: `/root`). The site will be served at `https://<your-username>.github.io/HotMealBar/`.
 
 ---
 
-## 🎨 Design System
+## ✨ Features
 
-We avoided standard bright reds, yellows, and greens, opting for a custom-tailored, premium palette:
-- **Primary / Brand Dark**: Navy (`#1b263b`)
-- **Accent Color**: Warm Copper (`#c97c5d`)
-- **Secondary**: Slate Blue (`#415a77`)
-- **Background Blocks**: Soft Ivory (`#f8f5f2`)
+**Customer side**
+- Eye‑catching home page with hero photo collage, animated marquee, heritage story and real customer reviews
+- Full menu catalog (50 dishes) with live search, category filters, sorting and pagination
+- Dish detail modal with ingredients, reviews and ratings
+- Slide‑out shopping cart with quantity controls (saved to `localStorage`)
+- Checkout flow and **live, simulated order tracking** (animated map + status stepper)
+- "Join Us" student‑reseller application form
+- Track‑order lookup by order ID
+
+**Admin side**
+- Dashboard with KPIs, a hand‑drawn HTML5 Canvas revenue chart and top‑selling dishes
+- Orders ledger with search, status filter, pagination and inline status updates
+- Customer directory with spend aggregation
+
+## 🎨 Design language
+- **Palette:** deep navy, wok‑orange, teal, gold and chilli‑red on a warm paper‑grain backdrop
+- **Type:** `Fraunces` (display serif), `Plus Jakarta Sans` (body), `Caveat` (handwritten accents)
+- Brand colours and food photography taken from the real Hot Meal Bar identity
+
+## 🛠️ Tech
+- Vanilla JavaScript (ES modules) — no framework
+- **Tailwind CSS via the Play CDN** (compiles in the browser, so there is **no build step**)
+- Static JSON datasets (`/data`) loaded with `fetch`
+- 100% client‑side — deployable to any static host
+
+## ▶️ Run locally
+No Node.js required — just serve the folder over HTTP:
+
+```bash
+# Python 3
+python -m http.server 5500
+# then open http://127.0.0.1:5500
+```
+
+> Opening `index.html` directly with `file://` will not work because the app uses `fetch` and ES modules, which require an HTTP server.
+
+## 📁 Structure
+```
+index.html            # App shell + Tailwind config + brand styles
+assets/               # Logo + real food photography
+data/                 # meals, orders, customers, delivery, ratings (JSON)
+src/js/
+  app.js              # Router / orchestrator
+  store.js            # State + cart + order simulation
+  data-loader.js      # Query/sort/paginate engine
+  views/              # customer.js, admin.js
+  components/         # cards, table, charts, tracking
+```
+
+## 🔐 Halal
+All recipes and copy reflect a fully Halal kitchen. Beef/lamb references are halal; no pork or non‑halal ingredients are used anywhere in the menu.
 
 ---
-
-## 📂 Project Structure
-
-```
-├── data/
-│   ├── meals.json        # 50 detailed meals
-│   ├── customers.json    # 250 registered customers
-│   ├── orders.json       # 300 orders
-│   ├── delivery.json     # Coordinates & delivery statuses
-│   └── ratings.json      # 300 reviews & ratings
-├── src/
-│   ├── css/
-│   │   └── index.css     # Tailwinds baseline & custom styles
-│   └── js/
-│       ├── app.js        # Main layout coordinator & event listener
-│       ├── store.js      # Central state store with order state machine
-│       ├── data-loader.js# JSON dataset query parser & filter resolver
-│       ├── components/
-│       │   ├── cards.js  # Card HTML templates
-│       │   ├── table.js  # Reusable data table builder
-│       │   ├── charts.js # Canvas-based charts
-│       │   └── tracking.js # Active delivery step trackers
-│       └── views/
-│           ├── customer.js # Customer pages controller
-│           └── admin.js    # Admin dashboard pages controller
-├── index.html
-├── package.json
-├── tailwind.config.js
-└── postcss.config.js
-```
-
----
-
-## 🚀 How to Run the Project
-
-### Prerequisites
-Make sure you have [Node.js](https://nodejs.org/) (version 16 or higher) and `npm` installed.
-
-### 1. Install Dependencies
-Run the following command in the root folder of the project to install all dev dependencies:
-```bash
-npm install
-```
-
-### 2. Start the Development Server
-Launch the local dev server:
-```bash
-npm run dev
-```
-By default, the application will run at **`http://localhost:5173/`**. Open this address in your web browser.
-
-### 3. Build for Production
-To bundle and optimize the project for production, run:
-```bash
-npm run build
-```
-This generates static files in the `/dist` directory. You can preview the production bundle locally with:
-```bash
-npm run preview
-```
+© 2026 Hot Meal Bar 好米巴 · Built for the VibeUI Challenge 2026.
