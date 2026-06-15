@@ -27,6 +27,18 @@ export function renderRatingStars(rating) {
 
 export const FALLBACK_IMG = './assets/dumplings-plate.jpeg';
 
+// Traditional red "chop" seal (印章) reading 好米巴 — a signature brand mark
+export function renderSeal(extraClass = '') {
+  return `
+    <svg viewBox="0 0 100 100" class="seal-stamp ${extraClass}" role="img" aria-label="Hot Meal Bar seal 好米巴">
+      <rect x="5" y="5" width="90" height="90" rx="14" fill="#D7443E"/>
+      <rect x="11" y="11" width="78" height="78" rx="10" fill="none" stroke="#FBF6EE" stroke-width="2.5" opacity="0.85"/>
+      <text x="50" y="33" text-anchor="middle" font-family="Fraunces, serif" font-size="26" font-weight="700" fill="#FBF6EE">好</text>
+      <text x="50" y="60" text-anchor="middle" font-family="Fraunces, serif" font-size="26" font-weight="700" fill="#FBF6EE">米</text>
+      <text x="50" y="84" text-anchor="middle" font-family="Fraunces, serif" font-size="22" font-weight="700" fill="#FBF6EE">巴</text>
+    </svg>`;
+}
+
 export function renderMealCard(meal) {
   const zh = meal.nameZh ? `<span class="font-hand text-teal text-lg leading-none">${meal.nameZh}</span>` : '';
   return `

@@ -2,7 +2,7 @@
 
 import { store } from '../store.js';
 import { dataLoader } from '../data-loader.js';
-import { renderMealCard, renderCategoryChips, renderRatingStars } from '../components/cards.js';
+import { renderMealCard, renderCategoryChips, renderRatingStars, renderSeal } from '../components/cards.js';
 import { renderPagination } from '../components/table.js';
 import { renderTrackingStepper, renderMockMap } from '../components/tracking.js';
 
@@ -62,7 +62,7 @@ export const customerViews = {
             Dumplings folded by hand each morning, noodles pulled to order, skewers kissed by charcoal. Real Halal Chinese comfort food, delivered to your door in under 35 minutes.
           </p>
           <div class="flex flex-wrap gap-3 pt-1">
-            <button onclick="window.app.switchView('catalog')" class="bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-2xl shadow-accent-glow hover:shadow-none transition-all cursor-pointer active:scale-95">
+            <button onclick="window.app.switchView('catalog')" class="btn-shine bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-2xl shadow-accent-glow hover:shadow-none transition-all cursor-pointer active:scale-95">
               Order Now
             </button>
             <button onclick="document.getElementById('home-bestsellers').scrollIntoView({behavior:'smooth'})" class="bg-white hover:bg-background-dark text-primary border border-secondary/15 font-semibold px-8 py-4 rounded-2xl transition-all cursor-pointer active:scale-95">
@@ -77,11 +77,11 @@ export const customerViews = {
             </div>
             <div class="flex items-center gap-2">
               <div class="w-9 h-9 rounded-xl bg-gold/15 text-gold-dark flex items-center justify-center"><svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg></div>
-              <div><p class="text-sm font-bold text-primary leading-none">4.9 / 5.0</p><p class="text-[11px] text-secondary-light">12,000+ orders</p></div>
+              <div><p class="text-sm font-bold text-primary leading-none"><span data-count="4.9">0</span> / 5.0</p><p class="text-[11px] text-secondary-light"><span data-count="12000" data-suffix="+">0</span> orders</p></div>
             </div>
             <div class="flex items-center gap-2">
               <div class="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-              <div><p class="text-sm font-bold text-primary leading-none">35 minutes</p><p class="text-[11px] text-secondary-light">Hot delivery</p></div>
+              <div><p class="text-sm font-bold text-primary leading-none"><span data-count="35">0</span> minutes</p><p class="text-[11px] text-secondary-light">Hot delivery</p></div>
             </div>
           </div>
         </div>
@@ -97,6 +97,8 @@ export const customerViews = {
           <div class="absolute bottom-16 right-4 w-[40%] h-[40%] rounded-[2rem] overflow-hidden shadow-premium-hover rotate-3 border-4 border-white" style="animation: floaty 8s ease-in-out infinite;">
             <img src="./assets/beijing-noodles.jpeg" alt="Beijing noodles" class="w-full h-full object-cover"/>
           </div>
+          <!-- signature red seal stamp -->
+          <div class="absolute -bottom-4 left-2 w-20 md:w-24 rotate-[-12deg] z-30">${renderSeal('w-full h-auto')}</div>
           <!-- floating rating chip -->
           <div class="absolute top-6 -left-1 md:left-2 bg-white rounded-2xl shadow-premium px-4 py-3 flex items-center gap-3 z-20 animate-slide-up">
             <img src="./assets/logo-mark.jpeg" class="w-10 h-10 rounded-xl object-cover" alt="logo"/>
@@ -170,8 +172,8 @@ export const customerViews = {
             </p>
             <div class="grid grid-cols-3 gap-4 pt-3">
               <div><p class="font-display text-3xl font-black text-accent-light">1989</p><p class="text-[11px] text-white/60 uppercase tracking-wider">Est.</p></div>
-              <div><p class="font-display text-3xl font-black text-accent-light">50+</p><p class="text-[11px] text-white/60 uppercase tracking-wider">Dishes</p></div>
-              <div><p class="font-display text-3xl font-black text-accent-light">100%</p><p class="text-[11px] text-white/60 uppercase tracking-wider">Halal</p></div>
+              <div><p class="font-display text-3xl font-black text-accent-light"><span data-count="50" data-suffix="+">0</span></p><p class="text-[11px] text-white/60 uppercase tracking-wider">Dishes</p></div>
+              <div><p class="font-display text-3xl font-black text-accent-light"><span data-count="100" data-suffix="%">0</span></p><p class="text-[11px] text-white/60 uppercase tracking-wider">Halal</p></div>
             </div>
             <button onclick="window.app.switchView('apply')" class="mt-2 bg-white text-primary font-semibold px-7 py-3.5 rounded-2xl hover:bg-background-dark transition-all cursor-pointer active:scale-95 text-sm">
               Become a campus reseller →

@@ -93,15 +93,97 @@
     .noodle-divider { height: 18px; width: 100%; background-repeat: repeat-x; background-size: 64px 18px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='18'%3E%3Cpath d='M0 9 C 16 -2, 16 20, 32 9 S 48 -2, 64 9' fill='none' stroke='%23E2761B' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E"); }
     .text-balance { text-wrap: balance; }
+
+    /* ---- Scroll-reveal ---- */
+    .reveal-init { opacity: 0; transform: translateY(26px); }
+    .reveal-in {
+      opacity: 1; transform: none;
+      transition: opacity .7s cubic-bezier(.16,1,.3,1) var(--reveal-delay,0ms),
+                  transform .7s cubic-bezier(.16,1,.3,1) var(--reveal-delay,0ms);
+    }
+    .reveal-noanim { transition: none !important; }
+
+    /* ---- Top scroll-progress bar ---- */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 60;
+      transform: scaleX(0); transform-origin: 0 50%;
+      background: linear-gradient(90deg,#E2761B,#E0A526,#D7443E);
+      box-shadow: 0 1px 6px rgba(226,118,27,.5);
+      transition: transform .1s linear; pointer-events: none;
+    }
+
+    /* ---- Navbar shrink on scroll ---- */
+    #nav-header { transition: background-color .3s ease, box-shadow .3s ease, height .3s ease; }
+    #nav-header.nav-scrolled { background-color: rgba(255,255,255,.95); box-shadow: 0 10px 30px -18px rgba(22,40,77,.45); }
+    #nav-header.nav-scrolled .nav-bar-inner { height: 4rem; }
+
+    /* ---- Shine sweep on primary CTAs ---- */
+    .btn-shine { position: relative; overflow: hidden; }
+    .btn-shine::after {
+      content: ''; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,.45), transparent);
+      transform: skewX(-20deg); transition: left .6s ease;
+    }
+    .btn-shine:hover::after { left: 140%; }
+
+    /* ---- Red seal / chop motif ---- */
+    .seal-stamp { filter: drop-shadow(0 4px 10px rgba(215,68,62,.35)); }
+
+    /* ---- Intro loader ---- */
+    #app-loader {
+      position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1.25rem;
+      background: radial-gradient(circle at 50% 38%, #1B335F, #0B1730 70%);
+      transition: opacity .55s ease, visibility .55s ease;
+    }
+    #app-loader.loader-hide { opacity: 0; visibility: hidden; }
+    .loader-bowl { position: relative; width: 92px; height: 92px; }
+    .loader-bowl img { width: 92px; height: 92px; border-radius: 1.4rem; object-fit: cover; box-shadow: 0 18px 50px -18px rgba(0,0,0,.6); }
+    .loader-steam { position: absolute; top: -22px; left: 0; right: 0; display: flex; justify-content: center; gap: 9px; }
+    .loader-steam span {
+      display: block; width: 5px; height: 26px; border-radius: 9999px;
+      background: linear-gradient(to top, rgba(245,155,61,.0), rgba(245,155,61,.85));
+      animation: loaderSteam 1.8s ease-in-out infinite;
+    }
+    .loader-steam span:nth-child(2) { animation-delay: .35s; }
+    .loader-steam span:nth-child(3) { animation-delay: .7s; }
+    @keyframes loaderSteam { 0% { opacity: 0; transform: translateY(6px) scaleY(.6); } 40% { opacity: .9; } 100% { opacity: 0; transform: translateY(-16px) scaleY(1.25); } }
+    .loader-track { width: 150px; height: 3px; border-radius: 9999px; background: rgba(255,255,255,.15); overflow: hidden; }
+    .loader-track i { display: block; height: 100%; width: 40%; border-radius: 9999px; background: linear-gradient(90deg,#E2761B,#E0A526); animation: loaderBar 1.2s ease-in-out infinite; }
+    @keyframes loaderBar { 0% { transform: translateX(-120%);} 100% { transform: translateX(320%);} }
+
+    /* ---- Accessibility ---- */
+    button:focus-visible, a:focus-visible, [tabindex]:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 3px solid rgba(226,118,27,.55); outline-offset: 2px; border-radius: .5rem;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+      .reveal-init { opacity: 1 !important; transform: none !important; }
+    }
   </style>
 </head>
 <body class="bg-background min-h-screen flex flex-col justify-between">
 
   <!-- ============================================ -->
+  <!-- BRANDED INTRO LOADER                         -->
+  <!-- ============================================ -->
+  <div id="app-loader">
+    <div class="loader-bowl">
+      <div class="loader-steam"><span></span><span></span><span></span></div>
+      <img src="./assets/logo-mark.jpeg" alt="Hot Meal Bar" />
+    </div>
+    <div class="text-center">
+      <p class="font-display text-white text-xl font-bold tracking-tight">Hot Meal Bar <span class="font-hand text-accent-light text-2xl align-middle">好米巴</span></p>
+      <p class="text-white/45 text-[10px] uppercase tracking-[0.25em] mt-1">Warming up the wok…</p>
+    </div>
+    <div class="loader-track"><i></i></div>
+  </div>
+
+  <!-- ============================================ -->
   <!-- CUSTOMER HEADER (Desktop Navigation)         -->
   <!-- ============================================ -->
   <header id="nav-header" class="fixed top-0 left-0 right-0 z-40 bg-white/85 backdrop-blur-md border-b border-secondary/5 transition-all">
-    <div class="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
+    <div class="nav-bar-inner max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between transition-all duration-300">
       <!-- Logo / Branding -->
       <div class="flex items-center gap-3 cursor-pointer group" onclick="window.app.switchView('home')">
         <img src="./assets/logo-mark.jpeg" alt="Hot Meal Bar logo" class="w-11 h-11 rounded-2xl object-cover ring-2 ring-accent/20 shadow-sm group-hover:ring-accent/50 transition-all" />
@@ -194,13 +276,61 @@
   <!-- ============================================ -->
   <!-- CUSTOMER FOOTER                              -->
   <!-- ============================================ -->
-  <footer class="bg-primary-dark text-white/50 py-6 border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-      <p>© 2026 Hot Meal Bar 好米巴 · Halal Chinese Kitchen since 1989. Built for the VibeUI Challenge 2026.</p>
-      <div class="flex gap-6">
-        <span class="hover:text-white cursor-pointer">Privacy Policy</span>
-        <span class="hover:text-white cursor-pointer">Terms of Service</span>
-        <span class="hover:text-white cursor-pointer">Support</span>
+  <footer class="bg-primary-dark text-white/55 border-t border-white/5">
+    <div class="noodle-divider opacity-60"></div>
+    <div class="max-w-7xl mx-auto px-4 md:px-8 py-12 grid gap-10 md:grid-cols-4">
+      <!-- Brand + seal -->
+      <div class="md:col-span-2 space-y-4">
+        <div class="flex items-center gap-4">
+          <svg viewBox="0 0 100 100" class="seal-stamp w-16 h-16 shrink-0" role="img" aria-label="Hot Meal Bar seal">
+            <rect x="5" y="5" width="90" height="90" rx="14" fill="#D7443E"/>
+            <rect x="11" y="11" width="78" height="78" rx="10" fill="none" stroke="#FBF6EE" stroke-width="2.5" opacity="0.85"/>
+            <text x="50" y="33" text-anchor="middle" font-family="Fraunces, serif" font-size="26" font-weight="700" fill="#FBF6EE">好</text>
+            <text x="50" y="60" text-anchor="middle" font-family="Fraunces, serif" font-size="26" font-weight="700" fill="#FBF6EE">米</text>
+            <text x="50" y="84" text-anchor="middle" font-family="Fraunces, serif" font-size="22" font-weight="700" fill="#FBF6EE" letter-spacing="1">巴</text>
+          </svg>
+          <div>
+            <p class="font-display text-white text-lg font-bold leading-tight">Hot Meal Bar <span class="font-hand text-accent-light text-xl">好米巴</span></p>
+            <p class="text-[11px] uppercase tracking-[0.18em] text-white/40 font-semibold mt-0.5">Halal Chinese Kitchen · Est. 1989</p>
+          </div>
+        </div>
+        <p class="text-sm leading-relaxed max-w-sm text-white/45">Hand-folded dumplings, hand-pulled noodles and charcoal skewers — the warmth of Chinese Muslim home cooking, delivered hot.</p>
+        <span class="inline-flex items-center gap-2 bg-success/15 text-success-light text-[11px] font-bold px-3 py-1.5 rounded-full">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          100% Halal Certified
+        </span>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Explore</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><button onclick="window.app.switchView('home')" class="hover:text-white transition-colors cursor-pointer">Home</button></li>
+          <li><button onclick="window.app.switchView('catalog')" class="hover:text-white transition-colors cursor-pointer">Our Menu</button></li>
+          <li><button onclick="window.app.switchView('track-order')" class="hover:text-white transition-colors cursor-pointer">Track Order</button></li>
+          <li><button onclick="window.app.switchView('apply')" class="hover:text-white transition-colors cursor-pointer">Join Us</button></li>
+        </ul>
+      </div>
+
+      <!-- Hours / contact -->
+      <div>
+        <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Visit Us</h4>
+        <ul class="space-y-2.5 text-sm text-white/45">
+          <li class="flex items-start gap-2"><svg class="w-4 h-4 mt-0.5 text-accent-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg> Jalan Sultan, Kuala Lumpur</li>
+          <li class="flex items-start gap-2"><svg class="w-4 h-4 mt-0.5 text-accent-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Daily · 10am – 10pm</li>
+          <li class="flex items-start gap-2"><svg class="w-4 h-4 mt-0.5 text-accent-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg> +60 12-345 6789</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 md:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] text-white/40">
+        <p>© 2026 Hot Meal Bar 好米巴 · Built for the VibeUI Challenge 2026.</p>
+        <div class="flex gap-6">
+          <span class="hover:text-white cursor-pointer">Privacy</span>
+          <span class="hover:text-white cursor-pointer">Terms</span>
+          <span class="hover:text-white cursor-pointer">Support</span>
+        </div>
       </div>
     </div>
   </footer>

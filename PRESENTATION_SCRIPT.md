@@ -101,6 +101,19 @@
 
 ---
 
+## 7b. Why this is different (say this if you want to stand out!)
+
+> "A lot of websites today look the same. I worked hard to make mine feel like a **real brand**, not a template:
+>
+> - It opens with a **branded loading screen** with rising steam — a little wow moment.
+> - I designed a **traditional red Chinese 'chop' seal** with the restaurant's name 好米巴 — you'll see it on the hero and in the footer. That's a unique, cultural touch.
+> - As you scroll, sections **gently fade in**, the numbers **count up**, and there's a **progress bar** at the top.
+> - I used a **serif heading font and a handwritten font** with the restaurant's real colours and photos.
+> - It's **accessible** — it respects 'reduced motion' settings and has clear keyboard focus outlines.
+> - And I **tested it with an automated script** that checks every button, link, image and data file — it even caught and fixed a real bug."
+
+---
+
 ## 8. Closing (15 seconds)
 
 > "So that's **Hot Meal Bar** — a beautiful, fully working food‑ordering website with live tracking and an admin dashboard, built around a real Halal Chinese restaurant's identity. Thank you! I'm happy to take any questions."

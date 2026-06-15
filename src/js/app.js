@@ -3,6 +3,7 @@
 import { store } from './store.js';
 import { customerViews } from './views/customer.js';
 import { adminViews } from './views/admin.js';
+import { enhanceView, initChrome, hideLoader } from './components/enhance.js';
 
 class App {
   constructor() {
@@ -27,11 +28,19 @@ class App {
     // Subscribe to State Changes for reactive rendering
     store.subscribe((state) => this.render(state));
 
+    // One-time page chrome (scroll progress bar + navbar shrink)
+    initChrome();
+
     // Load initial JSON datasets
     await store.init();
 
     // Default view
     this.switchView('home');
+
+    // Dismiss the branded intro loader, then replay the entrance animation
+    // so the scroll-reveal + counters play for the user (not hidden behind the loader).
+    hideLoader();
+    enhanceView(store.state.activeView, true);
   }
 
   // View router
@@ -201,6 +210,9 @@ class App {
     if (!this.cartDrawer.classList.contains('translate-x-full')) {
       customerViews.renderCartDrawer();
     }
+
+    // 4. Post-render polish (scroll-reveal + counters), gated to real view changes
+    enhanceView(state.activeView);
   }
 
   // Update navbar visual links
@@ -265,6 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.app.removeFromCart = app.removeFromCart.bind(app);
   window.app.updateCartQuantity = app.updateCartQuantity.bind(app);
   window.app.submitRating = app.submitRating.bind(app);
+  window.app.showFloatingAlert = app.showFloatingAlert.bind(app);
 
   app.start();
 });
